@@ -1,0 +1,1 @@
+DATABASE_URL = postgresql://neondb_owner:npg_cza7d2KpGeJC@ep-icy-lake-ats7xl4g-pooler.c-9.us-east-1.aws.neon.tech/neondb?sslmode=require&channel_binding=require
