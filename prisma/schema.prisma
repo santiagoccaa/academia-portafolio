@@ -11,3 +11,112 @@ generator client {
 datasource db {
   provider = "postgresql"
 }
+
+model Course {
+  id          String  @id @default(uuid())
+  userId      String
+  title       String  @db.Text
+  slug        String  @unique @db.Text
+  description String? @db.Text
+  imageUrl    String? @db.Text
+  price       String?
+  isPublished Boolean @default(false)
+  level       String? @db.Text
+
+  category  String?          @db.Text
+  chapters  Chapter[]
+  purchases Purchase[]
+  feedback  FeedbackCourse[]
+
+  courseAuthor CourseAuthor @relation(fields: [userId], references: [userId], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updateAt  DateTime @updatedAt
+}
+
+model CourseAuthor {
+  id        String @id @default(uuid())
+  userId    String @unique
+  firstName String
+  lastName  String
+  imageUrl  String
+
+  courses Course[]
+
+  createdAt DateTime @default(now())
+  updateAt  DateTime @updatedAt
+}
+
+model FeedbackCourse {
+  id          String  @id @default(uuid())
+  userId      String
+  description String? @db.Text
+  stars       Int
+
+  createdAt DateTime @default(now())
+  updateAt  DateTime @updatedAt
+  course    Course   @relation(fields: [courseId], references: [id], onDelete: Cascade)
+  courseId  String
+
+  @@unique([userId, courseId])
+}
+
+model Chapter {
+  id          String  @id @default(uuid())
+  title       String
+  description String? @db.Text
+  videoUrl    String? @db.Text
+  position    Int
+  isPublised  Boolean @default(false)
+  isFree      Boolean @default(false)
+  duration    Int?
+
+  courseId String
+  couse    Course @relation(fields: [courseId], references: [id], onDelete: Cascade)
+
+  userProgrestss UserProgress[]
+
+  createdAt DateTime @default(now())
+  updateAt  DateTime @updatedAt
+}
+
+model UserProgress {
+  id     String @id @default(uuid())
+  userId String
+
+  chapterId String
+  chapter   Chapter @relation(fields: [chapterId], references: [id], onDelete: Cascade)
+
+  isCompleted Boolean @default(false)
+
+  createdAt DateTime @default(now())
+  updateAt  DateTime @updatedAt
+
+  @@unique([userId, chapterId])
+  @@index([chapterId])
+}
+
+model Purchase {
+  id     String @id @default(uuid())
+  userId String
+
+  courseId String
+  course   Course @relation(fields: [courseId], references: [id], onDelete: Cascade)
+
+  price Float
+
+  createdAt DateTime @default(now())
+  updateAt  DateTime @updatedAt
+
+  @@unique([userId, courseId])
+  @@index([courseId])
+}
+
+model StripeCustomer {
+  id               String @id @default(uuid())
+  userId           String @unique
+  stripeCustomerId String
+
+  createdAt DateTime @default(now())
+  updateAt  DateTime @updatedAt
+}
