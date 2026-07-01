@@ -1,18 +1,14 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Space_Grotesk } from "next/font/google";
 import "./globals.css";
 
 import { ClerkProvider, Show, SignInButton, SignUpButton, UserButton } from '@clerk/nextjs'
 
-const geistSans = Geist({
+const fontAcademy = Space_Grotesk({
   variable: "--font-geist-sans",
   subsets: ["latin"],
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -27,11 +23,23 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      className={`${fontAcademy.className} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">
-        <ClerkProvider>
-          <header className="flex justify-end items-center p-4 gap-4 h-16">
+        <ClerkProvider
+          appearance={{
+            elements: {
+              userButtonPopoverFooter: { display: "none" },
+            },
+          }}
+          localization={{
+            userButton: {
+              action__signOut: "Cerrar sesión",
+              action__manageAccount: "Gestionar cuenta",
+            },
+          }}
+        >
+          <header className=" justify-end hidden items-center p-4 gap-4 h-16">
             <Show when="signed-out">
               <SignInButton />
               <SignUpButton>
