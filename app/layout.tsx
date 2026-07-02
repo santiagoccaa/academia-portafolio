@@ -1,8 +1,11 @@
 import type { Metadata } from "next";
-import { Space_Grotesk } from "next/font/google";
+import { Space_Grotesk, Inter } from "next/font/google";
 import "./globals.css";
 
 import { ClerkProvider, Show, SignInButton, SignUpButton, UserButton } from '@clerk/nextjs'
+import { cn } from "@/lib/utils";
+
+const inter = Inter({subsets:['latin'],variable:'--font-sans'});
 
 const fontAcademy = Space_Grotesk({
   variable: "--font-geist-sans",
@@ -23,7 +26,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${fontAcademy.className} h-full antialiased`}
+      className={cn("h-full", "antialiased", fontAcademy.className, "font-sans", inter.variable)}
     >
       <body className="min-h-full flex flex-col">
         <ClerkProvider
