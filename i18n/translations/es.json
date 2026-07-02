@@ -1,0 +1,322 @@
+{
+    "common": {
+        "filled": "Completado",
+        "course": "Curso",
+        "principiante": "Principiante",
+        "intermedio": "Intermedio",
+        "avanzado": "Avanzado",
+        "published": "Publicado",
+        "unpublished": "Sin publicar",
+        "chapters": "Capitulos",
+        "cancel": "Cancelar",
+        "edit": "Editar",
+        "delete": "Eliminar",
+        "create": "Crear Curso",
+        "createYou": "Crea tu curso",
+        "level": "Nivel",
+        "price": "Precio",
+        "post": "Publicar",
+        "unpublish": "Despublicar",
+        "characters": "Caracteres",
+        "free": "Gratis",
+        "hidden": "Ocultar",
+        "save": "Guardar",
+        "loading": "Cargando"
+    },
+    "editCourse": {
+        "header": {
+            "button": "Volver a todos los cursos"
+        },
+        "courseForm": {
+            "title": "Configuracion del curso",
+            "formTitle": "Titulo del curso",
+            "formCategory": "Categoria",
+            "formDescription": "Descripcion",
+            "msTitle": "Esto es lo que el usuario vera como titulo del curso",
+            "msSlug": "Es unica y no se puede modificar",
+            "msDescription": "Pon la descripcion completa del curso",
+            "button": "Guardar informacion basica",
+            "titleImage": "Imagen del curso",
+            "buttonImage": "Editar imagen",
+            "titlePrice": "Precio del curso",
+            "buttonPrice": "Guardar precio",
+            "titleChapters": "Capitulos del curso",
+            "subtitle": "Capitulos completos",
+            "buttonNew": "Crear capitulo"
+        },
+        "chapterForm": {
+            "buttonHeader": "Volver a la edicion del curso",
+            "title": "Configuracion del capitulo",
+            "formName": "Nombre del capitulo",
+            "formDescription": "Descripcion del capitulo",
+            "check": "Capitulo publico",
+            "message": "Si quieres que este capitulo sea visible para todos los usuarios",
+            "titleVideo": "Añade o modifica el video",
+            "button": "Editar video",
+            "selectVideo": "Selecciona el video",
+            "messageVideo": "No hay vídeo"
+        }
+    },
+    "modal": {
+        "deleteCourse": {
+            "title": "Estas seguro?",
+            "message": "Esto borrara el curso y todos sus datos."
+        }
+    },
+    "auth": {
+        "user": "Gestionar cuenta",
+        "signOut": "Cerrar session",
+        "title": "Bienvenido de vuelta",
+        "subtitle": "Inicia sesion"
+    },
+    "homePage": {
+        "hero": {
+            "title": {
+                "text1": "Mejora tus",
+                "text2": "Habilidades",
+                "text3": "para",
+                "text4": "Impulsar ",
+                "text5": "tu",
+                "text6": "Carrera ",
+                "text7": "profesional"
+            },
+            "description": "Aprende habilidades de diseño UI-UX con Weekend UX. El sistema de aprendizaje en línea más reciente para hacer crecer tu conocimiento.",
+            "buttons": {
+                "started": "Comparte tu experiencia",
+                "freeTrial": "Ver cursos"
+            },
+            "icons": {
+                "speaking": "Oratoria",
+                "career": "Orientado a la Carrera",
+                "creative": "Pensamiento Creativo"
+            },
+            "box": {
+                "box1": "Cursos en Video",
+                "box2": "Cursos en Línea",
+                "box3": "Tutores"
+            },
+            "collaboration": "Colaboradores"
+        },
+        "navbar": {
+            "input": {
+                "title": "¿Qué quieres aprender?",
+                "button": "Explorar"
+            },
+            "nav": {
+                "home": "Inicio",
+                "aboutUs": "Sobre Nosotros",
+                "courses": "Cursos",
+                "contactUs": "Contáctanos"
+            },
+            "auth": {
+                "signIn": "Ingresar",
+                "free": "Crear cuenta gratis"
+            }
+        },
+        "services": {
+            "title": "Nuestros Servicios",
+            "subtitle": "Fomentando un entorno de aprendizaje lúdico y atractivo",
+            "cards": {
+                "card1": {
+                    "title": "Diseño de Interacción",
+                    "description": "Lecciones de diseño que cubren los desarrollos más recientes."
+                },
+                "card2": {
+                    "title": "Curso de Diseño UX",
+                    "description": "Clases de desarrollo que cubren los avances más recientes en la web."
+                },
+                "card3": {
+                    "title": "Interfaz de Usuario",
+                    "description": "Cursos de Diseño de Interfaz de Usuario que cubren las tendencias más recientes."
+                },
+                "link": "Saber Más"
+            }
+        },
+        "exploreCourses": {
+            "title": "Explorar Programas",
+            "subtitle": "Únete a nuestra reconocida clase, el conocimiento que adquieras definitivamente será útil para ti.",
+            "subtitle2": "Cursos Más Populares",
+            "button": "Ver todos los cursos"
+        },
+        "tutors": {
+            "title": "Tutores",
+            "subtitle": "Conoce a los Expertos",
+            "subtitle2": "En Weekend UX, instructores de todo el mundo enseñan a millones de estudiantes. Ofrecemos el conocimiento y las habilidades."
+        },
+        "feedback": "El momento perfecto para aprender no existe, pero el momento para empezar es ahora. Da el primer paso.",
+        "blog": {
+            "title": "Blog",
+            "subtitle": "Nuestras publicaciones mas recientes"
+        }
+    },
+    "aboutUsPage": {
+        "hero": {
+            "title": "Sobre Nosotros",
+            "subtitle1": "WEEKEND UX",
+            "subtitle2": "brindanmos las mejores oportunidades a estudiantes de todo el mundo.",
+            "description": "Weekend UX es una Academia de Diseño UI/UX enfocada en la Experiencia de Usuario y la Interfaz de Usuario. Fundada en 2023 con pasión por el Diseño de Interfaz de Usuario, la Experiencia de Usuario y la Interacción Humano-Computadora. Estamos comprometidos a brindarte los mejores cursos en el área de UI/UX para fortalecer tus habilidades y construir un futuro exitoso.",
+            "button": "Únete a Nosotros"
+        },
+        "features": {
+            "title": "Características",
+            "subtitle": "Siempre trabajamos para ofrecerte lo mejor en todos los aspectos.",
+            "description": "En WEEKENDUX, nuestro principal objetivo es orientar a nuestros estudiantes hacia sus metas, manteniéndolos constantes en sus ambiciones e impulsándolos a ser seguros de sí mismos en su camino de aprendizaje.",
+            "description1": "En internet puedes encontrar cualquier cosa con un solo clic, pero creemos que sin conocimiento y práctica, la información por sí sola no es suficiente para alcanzar el éxito.",
+            "button": "Saber Más"
+        },
+        "benefits": {
+            "title": "Nuestros Beneficios",
+            "subtitle": "Al unirte a la plataforma WEEKEND UX, podrás disfrutar de muchos beneficios.",
+            "description": "Accede a nuestra plataforma de aprendizaje y obtén contenido de calidad, instructores expertos y las mejores herramientas para impulsar tu carrera.",
+            "cards": {
+                "card1": {
+                    "title": "Estandarización",
+                    "description": "Al trabajar en un entorno global, garantizamos experiencias de aprendizaje consistentes y de calidad para todos los estudiantes."
+                },
+                "card2": {
+                    "title": "Costos Reducidos",
+                    "description": "Con Weekend UX, no hay costos de reproducción de materiales y, gracias al aprendizaje móvil y el microaprendizaje."
+                },
+                "card3": {
+                    "title": "Mayor Personalización",
+                    "description": "Así como cada estudiante es único, el aprendizaje tampoco es una experiencia única. Utilizamos diferentes métodos."
+                },
+                "card4": {
+                    "title": "Precios Accesibles",
+                    "description": "Con Weekend UX, no hay costos de reproducción de materiales y, gracias al aprendizaje móvil y el microaprendizaje."
+                },
+                "card5": {
+                    "title": "Satisfacción del Estudiante",
+                    "description": "Si deseas que los estudiantes retengan lo que aprenden, debes apuntar a altos niveles de satisfacción."
+                },
+                "card6": {
+                    "title": "Materiales Multimedia",
+                    "description": "Una de las principales razones por las que el aprendizaje personalizado es efectivo es que es el método ideal para."
+                }
+            }
+        }
+    },
+    "contactUsPage": {
+        "title": "Contáctanos",
+        "form": {
+            "subtitle": "Déjanos un mensaje",
+            "name": {
+                "title": "Nombre",
+                "placeholder": "Tu nombre"
+            },
+            "email": {
+                "title": "Correo electrónico",
+                "placeholder": "ejemplo@ejemplo.com"
+            },
+            "description": "Tu mensaje",
+            "button": "Enviar",
+            "alerts":{
+                "success":"Mensaje enviado con exito",
+                "error":"Algo salio mal, verifica que los campos esten correctos"
+            }
+        }
+    },
+    "appSidebar": {
+        "courses": "Cursos",
+        "myCourses": "Mis cursos",
+        "certificates": "Certificados",
+        "orders": "Pedidos",
+        "analytics": "Analitica",
+        "platform": "Plataforma",
+        "teacher": "Profesor"
+    },
+    "academy": {
+        "allCourses": "Todos los cursos",
+        "search": "Buscar curso",
+        "searchHome": "Que quieres aprender?",
+        "myCourses": "Mis cursos",
+        "certificated": "Certificados de los cursos",
+        "teacherMode": "Modo profesor",
+        "orders": "Todos mis pedidos",
+        "notFound": "Curso no encontrado",
+        "formOrders": {
+            "date": "Fecha",
+            "course": "Curso",
+            "state": "Estado",
+            "receipt": "Recibo",
+            "price": "Precio",
+            "total": "Total gastado",
+            "footer": "Lista de pedidos",
+            "message": "Ver recibo",
+            "message2": "Pagado"
+        },
+        "graph1": {
+            "subs": "Últimos Suscriptores",
+            "subtitle": "Suscriptores de los últimos 6 meses",
+            "footer1": "Tu crecimiento fue de",
+            "loading": "Cargando suscriptores..."
+        },
+        "graph2": {
+            "benefis": "Beneficios",
+            "subtitle": "Beneficios de los últimos 6 meses",
+            "footer1": "Tendencia al alza del 5.2% este mes",
+            "footer2": "Mostrando el total de visitas de los últimos 6 meses",
+            "loading": "Cargando datos..."
+        },
+        "graph3": {
+            "input": "Filtrar correos",
+            "colum1": "Fecha de compra",
+            "colum2": "Cliente",
+            "colum3": "Curso",
+            "colum4": "Precio"
+        }
+    },
+    "cardCourse": {
+        "createdAt": "Creado",
+        "subs": "Inscritos",
+        "message": "Inscrito"
+    },
+    "infoCourse": {
+        "lastUpdate": "Última actualización",
+        "viewCourse": "Ver Curso",
+        "enroll": "Inscribirse",
+        "content": "Contenido del curso",
+        "opinions": "Opiniones",
+        "progress": "Progreso del curso",
+        "opinion": "Tu opinion",
+        "button": "Editar opinion",
+        "titleForm": "¿Que te parecio este curso?",
+        "buttonSave": "Guardar comentario"
+    },
+    "subscriptionPage": {
+        "title1": "Sé parte de",
+        "title3": "y ayuda a otros a crecer",
+        "description": "Convierte tu conocimiento en ingresos y crea tu propia academia.",
+        "card": {
+            "title": "Plan Maestro",
+            "days": "dias",
+            "button": "Activar Plan",
+            "item1": "Llega a estudiantes de todo el mundo",
+            "item2": "Recibe el 90% de las ganancias",
+            "item3": "Publica y actualiza en cualquier momento",
+            "item4": "Construye tu marca personal",
+            "item5": "Genera ingresos recurrentes",
+            "item6": "Control total sobre tu contenido"
+        }
+    },
+    "alerts": {
+        "alert1": "Tu comentario fue enviado",
+        "error": "Ups... Algo salio mal",
+        "alert3": "Capitulo completado",
+        "alert4": "Capitulo no complicado",
+        "alert5": "Inscripcion exitosa",
+        "alert6": "Capitulo publicado",
+        "alert7": "Capitulo oculto",
+        "alert8": "Capitulo eliminado con existo",
+        "alert9": "Capitulo modificado",
+        "alert10": "Video actualizado con exito",
+        "alert11": "Capitulo creado",
+        "alert12": "Curso actualizado correctamente",
+        "alert13": "Imagen actualizada correctamente",
+        "alert14": "Precio actualizaco correctamente",
+        "alert15": "Curso publicado",
+        "alert16": "Curso oculto",
+        "alert17": "Curso eliminado correctamente",
+        "alert18": "Curso creado correctamente"
+    }
+}
