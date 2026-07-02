@@ -1,0 +1,322 @@
+{
+    "common": {
+        "filled": "Filled",
+        "course": "Course",
+        "principiante": "Beginner",
+        "intermedio": "Intermediate",
+        "avanzado": "Advanced",
+        "published": "Published",
+        "unpublished": "Unpublished",
+        "chapters": "Chapters",
+        "cancel": "Cancel",
+        "edit": "Edit",
+        "delete": "Delete",
+        "create": "Create course",
+        "createYou": "Create your course",
+        "level": "Level",
+        "price": "Price",
+        "post": "Post",
+        "unpublish": "Unpublish",
+        "characters": "Characters",
+        "free": "Free",
+        "hidden": "Hide",
+        "save": "Save",
+        "loading": "Loading"
+    },
+    "editCourse": {
+        "header": {
+            "button": "Back to all courses"
+        },
+        "courseForm": {
+            "title": "Course settings",
+            "formTitle": "Course title",
+            "formCategory": "Category",
+            "formDescription": "Description",
+            "msTitle": "This is what users will see as the course title",
+            "msSlug": "It is unique and cannot be modified",
+            "msDescription": "Provide the full course description",
+            "button": "Save basic information",
+            "titleImage": "Course image",
+            "buttonImage": "Edit image",
+            "titlePrice": "Course price",
+            "buttonPrice": "Save price",
+            "titleChapters": "Course chapters",
+            "subtitle": "Completed chapters",
+            "buttonNew": "Create chapter"
+        },
+        "chapterForm": {
+            "buttonHeader": "Back to course editing",
+            "title": "Chapter settings",
+            "formName": "Chapter name",
+            "formDescription": "Chapter description",
+            "check": "Public chapter",
+            "message": "Enable this if you want this chapter to be visible to all users",
+            "titleVideo": "Add or update the video",
+            "button": "Edit video",
+            "selectVideo": "Select the video",
+            "messageVideo": "There is no video."
+        }
+    },
+    "modal": {
+        "deleteCourse": {
+            "title": "Are you sure?",
+            "message": "This will delete the course and all its data."
+        }
+    },
+    "auth": {
+        "user": "Manage account",
+        "signOut": "Sign Out",
+        "title": "Welcome Back",
+        "subtitle": "Login Page"
+    },
+    "homePage": {
+        "hero": {
+            "title": {
+                "text1": "Up your",
+                "text2": "Skills",
+                "text3": "to",
+                "text4": "Advance ",
+                "text5": "your",
+                "text6": "Career ",
+                "text7": "path"
+            },
+            "description": "Learn UI-UX Design skills with weekend UX . The latest online learning system and material that help your knowledge growing.",
+            "buttons": {
+                "started": "Share your experience",
+                "freeTrial": "View courses"
+            },
+            "icons": {
+                "speaking": "Public Speaking",
+                "career": "Career-Oriented",
+                "creative": "Creative Thinking"
+            },
+            "box": {
+                "box1": "Video Courses",
+                "box2": "Online Courses",
+                "box3": "Tutors"
+            },
+            "collaboration": "Collaboration"
+        },
+        "navbar": {
+            "input": {
+                "title": "Want to learn?",
+                "button": "Explore"
+            },
+            "nav": {
+                "home": "Home",
+                "aboutUs": "About Us",
+                "courses": "Courses",
+                "contactUs": "Contact Us"
+            },
+            "auth": {
+                "signIn": "Sign In",
+                "free": "Create free account"
+            }
+        },
+        "services": {
+            "title": "Our Services",
+            "subtitle": "Fostering a playful & engaging learning environment",
+            "cards": {
+                "card1": {
+                    "title": "Interaction Design",
+                    "description": "Lessons on design that cover the most recent developments."
+                },
+                "card2": {
+                    "title": "UX Design Course",
+                    "description": "Classes in development that cover the most recent advancements in web."
+                },
+                "card3": {
+                    "title": "User Interface Design",
+                    "description": "User Interface Design courses that cover the most recent trends"
+                },
+                "link": "Learm More"
+            }
+        },
+        "exploreCourses": {
+            "title": "Explore Programs",
+            "subtitle": "Let's join our famous class, the knowledge provided will definitely be useful for you.",
+            "subtitle2": "Our Most Popular Class",
+            "button": "Explore all courses"
+        },
+        "tutors": {
+            "title": "Tutors",
+            "subtitle": "Meet the Heroes",
+            "subtitle2": "On Weekend UX, instructors from all over the world instruct millions of students. We offer the knowledge and abilities."
+        },
+        "feedback": "The perfect moment to learn doesn't exist, but the moment to start is now. Take the first step.",
+        "blog": {
+            "title": "Blog",
+            "subtitle": "Our recent blogs"
+        }
+    },
+    "aboutUsPage": {
+        "hero": {
+            "title": "About Us",
+            "subtitle1": "WEEKEND UX",
+            "subtitle2": "providing the best opportunities to the students around the glob.",
+            "description": "Weekend UX, is a UI/UX Design Academy in Delhi involved in User Experience and User Interface Training and Consulting. It was started in 2023 and passionate towards User Interface Design/ User Experience Design, Human Computer Interaction Design. Humanoid is gushing towards competence to acquire knowledge and have a wide understanding towards the sphere through the foremost courses in the area of UI/UX Design, by strengthening up your skills, for your golden future",
+            "button": "Join Us"
+        },
+        "features": {
+            "title": "Features",
+            "subtitle": "We are always working to provide you best of the features in all aspects.",
+            "description": "At WEEKENDUX the chief determination is to clear the minds of our students about their goals, while making them consistent in their ambitions and pushing them to be confident for their journey towards the course of time.",
+            "description1": "You will find every little thing on the internet in just a click of hand, but here we admire that without knowledge and practice the internet may even also fail you in your life.",
+            "button": "Learn More"
+        },
+        "benefits": {
+            "title": "Our Benefits",
+            "subtitle": "By Joining WEEKENS UX Platform, One Can Avail a Lot Of Benefits.",
+            "description": "Install our top-rated dropshipping app to your e-commerce site and get access to US Suppliers, AliExpress vendors, and the best.",
+            "cards": {
+                "card1": {
+                    "title": "Standardization",
+                    "description": "When working in a global workplace, it’s often difficult to gauge learners’ training experiences, which are"
+                },
+                "card2": {
+                    "title": "Reduced Costs",
+                    "description": "With Weekend UX, there’s no cost to reproduce materials and, thanks to mobile learning and microlearning"
+                },
+                "card3": {
+                    "title": "More Customization",
+                    "description": "ust like learners aren’t one-size-fits-all, learning is not a one-size-fits-all experience. By using different"
+                },
+                "card4": {
+                    "title": "Affordable Pricing",
+                    "description": "With Weekend UX, there’s no cost to reproduce materials and, thanks to mobile learning and microlearning"
+                },
+                "card5": {
+                    "title": "Learner Satisfaction",
+                    "description": "If you really want students to retain what they learn, you’ll need to aim for high satisfaction rates. Bad"
+                },
+                "card6": {
+                    "title": "Multimedia Materials",
+                    "description": "One of the main reasons why custom eLearning is effective is that it’s the perfect delivery method for"
+                }
+            }
+        }
+    },
+    "contactUsPage": {
+        "title": "Contact Us",
+        "form": {
+            "subtitle": "Leave us a message",
+            "name": {
+                "title": "Name",
+                "placeholder": "Your name"
+            },
+            "email": {
+                "title": "email",
+                "placeholder": "example@example.com"
+            },
+            "description": "Your message",
+            "button": "Send",
+            "alerts": {
+                "success": "Message sent successfully",
+                "error": "Something went wrong, please verify that the fields are correct"
+            }
+        }
+    },
+    "appSidebar": {
+        "courses": "Courses",
+        "myCourses": "My Courses",
+        "certificates": "Certificates",
+        "orders": "Orders",
+        "analytics": "Analytics",
+        "platform": "Platform",
+        "teacher": "Teacher"
+    },
+    "academy": {
+        "allCourses": "All Courses",
+        "search": "Search course",
+        "searchHome": "Want to learn?",
+        "myCourses": "My Courses",
+        "certificated": "Course Certificates",
+        "teacherMode": "Teacher mode",
+        "orders": "All My Orders",
+        "notFound": "Course not found",
+        "formOrders": {
+            "date": "Date",
+            "course": "Course",
+            "state": "Status",
+            "receipt": "Receipt",
+            "price": "Price",
+            "total": "Total spent",
+            "footer": "Order list",
+            "message": "View receipt",
+            "message2": "Paid"
+        },
+        "graph1": {
+            "subs": "Latest Subscribers",
+            "subtitle": "Subscribers from the last 6 months",
+            "footer1": "Your growth was",
+            "loading": "Loading subscribers..."
+        },
+        "graph2": {
+            "benefis": "Earnings",
+            "subtitle": "Earnings from the last 6 months",
+            "footer1": "Trending up by 5.2% this month",
+            "footer2": "Showing total visitors for the last 6 months",
+            "loading": "Loading data..."
+        },
+        "graph3": {
+            "input": "Filter emails",
+            "colum1": "Purchase date",
+            "colum2": "Client",
+            "colum3": "Course",
+            "colum4": "Price"
+        }
+    },
+    "cardCourse": {
+        "createdAt": "Created",
+        "subs": "Subscribers",
+        "message": "Enrolled"
+    },
+    "infoCourse": {
+        "lastUpdate": "Last update",
+        "viewCourse": "View Course",
+        "enroll": "Enrolled",
+        "content": "Course content",
+        "opinions": "Opinions",
+        "progress": "Course progress",
+        "opinion": "Your opinion",
+        "button": "Edit opinion",
+        "titleForm": "What did you think of this course?",
+        "buttonSave": "Save comment"
+    },
+    "subscriptionPage": {
+        "title1": "Be part of",
+        "title3": "and help others grow",
+        "description": "Turn your knowledge into income and build your own academy.",
+        "card": {
+            "title": "Master Plan",
+            "days": "days",
+            "button": "Activate Plan",
+            "item1": "Reach students worldwide",
+            "item2": "Earn 90% of your revenue",
+            "item3": "Publish and update anytime",
+            "item4": "Build your personal brand",
+            "item5": "Generate recurring income",
+            "item6": "Full control over your content"
+        }
+    },
+    "alerts": {
+        "alert1": "Your comment has been submitted",
+        "error": "Oops... Something went wrong",
+        "alert3": "Chapter completed",
+        "alert4": "Chapter not completed",
+        "alert5": "Enrollment successful",
+        "alert6": "Chapter published",
+        "alert7": "Chapter hidden",
+        "alert8": "Chapter successfully deleted",
+        "alert9": "Chapter updated",
+        "alert10": "Video successfully updated",
+        "alert11": "Chapter created",
+        "alert12": "Course successfully updated",
+        "alert13": "Image successfully updated",
+        "alert14": "Price successfully updated",
+        "alert15": "Course published",
+        "alert16": "Course hidden",
+        "alert17": "Course successfully deleted",
+        "alert18": "Course successfully created"
+    }
+}
