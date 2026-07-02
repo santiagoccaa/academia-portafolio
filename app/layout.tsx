@@ -6,6 +6,7 @@ import { ClerkProvider } from '@clerk/nextjs'
 import { cn } from "@/lib/utils";
 import { NextIntlClientProvider } from "next-intl";
 import { Navbar } from "@/modules/HomePage/components/Navbar";
+import { Footer } from "@/modules/HomePage/components";
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-sans' });
 
@@ -50,6 +51,7 @@ export default function RootLayout({
               <main className="flex-1">
                 {children}
               </main>
+              <Footer />
             </div>
           </NextIntlClientProvider>
         </ClerkProvider>

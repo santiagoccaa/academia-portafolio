@@ -114,14 +114,14 @@ export const Navbar = () => {
                             </ul>
                         </nav>
 
-                        <SignInButton>
+                        {/* <SignInButton>
                             <Button asChild>
                                 <Link href={"/academy"}>
                                     Academy
                                     <ArrowRight />
                                 </Link>
                             </Button>
-                        </SignInButton>
+                        </SignInButton> */}
                         <SignOutButton>
                             <div className="flex items-center gap-2">
                                 <Button variant="ghost" asChild>

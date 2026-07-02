@@ -1,3 +1,6 @@
 export * from './Hero'
 export * from './Services'
 export * from './Tutors'
+export * from './FeedBack'
+export * from './Blog'
+export * from './Footer'
