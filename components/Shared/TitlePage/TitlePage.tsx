@@ -9,7 +9,7 @@ interface TitlePageProps {
 
 export const TitlePage = ({ title, icon: Icon, children }: TitlePageProps) => {
     return (
-        <div className="w-full p-2 justify-between border rounded-md shadow">
+        <div className="w-full p-2 flex justify-between border rounded-md shadow">
             <div className="flex items-center gap-2">
                 <span className="p-2 rounded-full bg-primary text-white">
                     <Icon />
