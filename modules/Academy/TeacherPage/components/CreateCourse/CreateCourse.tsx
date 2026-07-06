@@ -29,8 +29,6 @@ export const FormCreateCourse = () => {
 
     const onSubmit = async (values: CreateCoursePayload) => {
 
-        console.log(values);
-        
         try {
             const course = await axios.post("/api/teacher/course", values);
 
