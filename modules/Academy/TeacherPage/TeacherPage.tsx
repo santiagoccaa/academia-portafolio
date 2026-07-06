@@ -10,6 +10,7 @@ import {
 import { TitlePage } from "@/components/Shared"
 import { Plus, UserPen } from "lucide-react"
 import { Button } from "@/components/ui/button"
+import { FormCreateCourse } from "./components"
 
 export const TeacherPage = () => {
     return (
@@ -26,11 +27,8 @@ export const TeacherPage = () => {
                     </DialogTrigger>
                     <DialogContent>
                         <DialogHeader>
-                            <DialogTitle>Are you absolutely sure?</DialogTitle>
-                            <DialogDescription>
-                                This action cannot be undone. This will permanently delete your account
-                                and remove your data from our servers.
-                            </DialogDescription>
+                            <DialogTitle className="text-xl">Crear curso</DialogTitle>
+                            <FormCreateCourse />
                         </DialogHeader>
                     </DialogContent>
                 </Dialog>

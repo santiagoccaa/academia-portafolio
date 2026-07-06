@@ -7,6 +7,7 @@ import { cn } from "@/lib/utils";
 import { NextIntlClientProvider } from "next-intl";
 import { Navbar } from "@/modules/HomePage/components/Navbar";
 import { Footer } from "@/modules/HomePage/components";
+import { Toaster } from "sonner";
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-sans' });
 
@@ -53,6 +54,7 @@ export default function RootLayout({
               </main>
               <Footer />
             </div>
+            <Toaster />
           </NextIntlClientProvider>
         </ClerkProvider>
       </body>
