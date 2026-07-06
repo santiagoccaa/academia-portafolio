@@ -1,7 +1,6 @@
 import {
     Dialog,
     DialogContent,
-    DialogDescription,
     DialogHeader,
     DialogTitle,
     DialogTrigger,
@@ -10,9 +9,15 @@ import {
 import { TitlePage } from "@/components/Shared"
 import { Plus, UserPen } from "lucide-react"
 import { Button } from "@/components/ui/button"
-import { FormCreateCourse } from "./components"
+import { CourseCard, FormCreateCourse } from "./components"
+import { Course } from "@/app/generated/prisma/client"
 
-export const TeacherPage = () => {
+interface CourseListProps {
+    courses: Course[];
+}
+
+export const TeacherPage = ({ courses }: CourseListProps) => {
+
     return (
         <div className="w-full p-4 space-y-4">
             <TitlePage
@@ -33,6 +38,10 @@ export const TeacherPage = () => {
                     </DialogContent>
                 </Dialog>
             </TitlePage>
+
+            {courses.map((course) => (
+                <CourseCard key={course.id} {...course} />
+            ))}
         </div>
     )
 }

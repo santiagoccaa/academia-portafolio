@@ -52,3 +52,24 @@ export async function POST(req: Request) {
         return new NextResponse('[POST-COURSE] Internal Error', { status: 500 })
     }
 }
+
+export async function GET(req: Request) {
+    try {
+
+        const { userId } = await auth()
+
+        if (!userId) {
+            return NextResponse.json({ message: "Unauthorized" }, { status: 401 })
+        }
+
+        const courses = await prisma.course.findMany({
+            where: {
+                userId
+            }
+        })
+
+        return NextResponse.json(courses, { status: 200 })
+    } catch (error) {
+        return NextResponse.json({ message: "COURSES_NOT_FOUND" }, { status: 500 })
+    }
+}
