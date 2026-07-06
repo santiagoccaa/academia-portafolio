@@ -22,10 +22,12 @@ export async function POST(req: Request) {
         const body: CreateCoursePayload = await req.json()
         const { title, slug } = body
 
+        const slugCourse = slug.replaceAll(' ', '-').toLocaleLowerCase()
+
         const course = await prisma.course.create({
             data: {
                 title,
-                slug,
+                slug: slugCourse,
 
                 courseAuthor: {
                     connectOrCreate: {
