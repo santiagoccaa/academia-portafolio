@@ -30,3 +30,9 @@ export type CardCourseInformation = Prisma.CourseGetPayload<{
     avgStars: number,
     purchaseCourse: boolean
 }
+
+// Create course
+export type CreateCoursePayload = {
+    title: string
+    slug: string
+}
