@@ -1,17 +1,32 @@
-"use client"
+"use client";
 
-import { useCourse } from "@/store"
+import { useCourse } from "@/store";
+import { useParams } from "next/navigation";
 
 export default function EditCourse() {
+    const params = useParams();
 
-    const { courseTeacherSelected } = useCourse()
+    const slug = Array.isArray(params.slug)
+        ? params.slug[0]
+        : params.slug;
 
-    if (!courseTeacherSelected) {
-        return <p className="text-xl font-medium">Selecciona un curso</p>
+    const { coursesTeacherById } = useCourse();
+
+    const courseSelected = coursesTeacherById.find(
+        (course) => course.slug === slug
+    );
+
+    if (!courseSelected) {
+        return (
+            <p className="text-xl font-medium">
+                Selecciona un curso
+            </p>
+        );
     }
+
     return (
         <div>
-            Editanto: {courseTeacherSelected.title}
+            Editando: {courseSelected.title}
         </div>
-    )
+    );
 }

@@ -8,7 +8,7 @@ export const CourseCard = (course: Course) => {
 
     const t = useTranslations()
 
-    const { title, id, price, level, imageUrl, description, isPublished } = course
+    const { title, id, price, level, imageUrl, description, isPublished, slug } = course
     return (
         <div className="relative border border-gray-200 rounded-md p-4 w-full bg-white shadow-sm hover:shadow-md transition-shadow duration-300">
             <div className="flex flex-col lg:flex-row gap-4 items-center justify-between">
@@ -42,7 +42,7 @@ export const CourseCard = (course: Course) => {
                     </div>
                 </div>
 
-                <Actions courseId={id} />
+                <Actions slug={slug} />
             </div>
         </div>
     )

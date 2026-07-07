@@ -19,20 +19,20 @@ import { toast } from "sonner"
 import { useTranslations } from "next-intl"
 
 type ActionsProps = {
-    courseId: string
+    slug: string
 }
 
-export const Actions = ({ courseId }: ActionsProps) => {
+export const Actions = ({ slug }: ActionsProps) => {
 
     const t = useTranslations()
     const router = useRouter()
 
     const onEdit = () => {
-        router.push(`/academy/teacher/${courseId}`)
+        router.push(`/academy/teacher/${slug}`)
     }
 
     const onDelete = () => {
-        axios.delete(`/api/course/${courseId}`)
+        axios.delete(`/api/course/${slug}`)
         toast(t('alerts.alert17'))
         router.refresh()
     }
