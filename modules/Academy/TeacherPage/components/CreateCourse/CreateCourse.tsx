@@ -14,10 +14,16 @@ import { useTranslations } from "next-intl";
 
 import { formSchema } from "./createcourse.form";
 import { CreateCoursePayload } from "@/types";
+import { useCourse } from "@/store";
+import { preGenerateObjectId } from "@/utils";
+import { useAuth } from "@clerk/nextjs";
 
 export const FormCreateCourse = () => {
     const t = useTranslations();
     const router = useRouter();
+
+    const { userId } = useAuth()
+    const { getCoursesTeacherById, coursesTeacherById, getCourseTeacherSelected } = useCourse();
 
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
@@ -29,14 +35,46 @@ export const FormCreateCourse = () => {
 
     const onSubmit = async (values: CreateCoursePayload) => {
 
+        const slug = values.slug.replaceAll(' ', '-').toLocaleLowerCase()
+
+        if (!userId) {
+            return toast('Unathorized')
+        }
+
+        const courseExists = coursesTeacherById.some(
+            (course) => course.slug === slug
+        );
+
+        if (courseExists) {
+            return toast("Este curso ya existe");
+        }
+
+        const newCourse = {
+            id: preGenerateObjectId(),
+            userId,
+            title: values.title,
+            slug,
+            description: "",
+            imageUrl: "",
+            price: "",
+            isPublished: false,
+            level: "",
+            category: "",
+            createdAt: new Date(),
+            updateAt: new Date(),
+        }
+
+        getCoursesTeacherById(newCourse);
+
+        getCourseTeacherSelected(newCourse)
+
+        toast.success(t("alerts.alert18"));
+
+        router.push(`/academy/teacher/${slug}`);
+
         try {
-            const course = await axios.post("/api/teacher/course", values);
-
-            // router.push(`/academy/teacher/${course.data.id}`);
-
-            toast.success(t("alerts.alert18"));
+            await axios.post("/api/teacher/course", values);
         } catch (error) {
-            console.log(error);
             toast.error(t("alerts.error"));
         }
     };
