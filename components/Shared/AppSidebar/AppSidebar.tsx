@@ -24,10 +24,7 @@ export function AppSidebar() {
 
     const t = useTranslations('appSidebar')
 
-    const { user } = useUser()
     const { state } = useSidebar()
-
-    const role = user?.publicMetadata?.role as string
 
     return (
         <Sidebar collapsible="icon">
@@ -51,12 +48,12 @@ export function AppSidebar() {
                             routes.map((route) => (
                                 <SidebarMenuItem key={route.title}>
                                     <SidebarMenuButton asChild>
-                                        <a href={route.url}>
+                                        <Link href={route.url}>
                                             <div className="p-1 rounded-lg text-white bg-primary">
                                                 <route.icon className="w-4 h-4" />
                                             </div>
                                             {state === "expanded" && <span>{t(route.title)}</span>}
-                                        </a>
+                                        </Link>
                                     </SidebarMenuButton>
                                 </SidebarMenuItem>
                             ))
@@ -71,11 +68,13 @@ export function AppSidebar() {
                                 {
                                     routesTeacher.map((routeTeacher) => (
                                         <SidebarMenuSubItem key={routeTeacher.title}>
-                                            <SidebarMenuSubButton href={routeTeacher.url} className="hover:bg-muted transition">
-                                                <div className="p-1 rounded-lg text-white bg-slate-400">
-                                                    <routeTeacher.icon className="w-4 h-4" />
-                                                </div>
-                                                {t(routeTeacher.title)}
+                                            <SidebarMenuSubButton className="hover:bg-muted transition" asChild>
+                                                <Link href={routeTeacher.url}>
+                                                    <div className="p-1 rounded-lg text-white bg-slate-400">
+                                                        <routeTeacher.icon className="w-4 h-4" />
+                                                    </div>
+                                                    {t(routeTeacher.title)}
+                                                </Link>
                                             </SidebarMenuSubButton>
                                         </SidebarMenuSubItem>
                                     ))

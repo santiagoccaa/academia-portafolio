@@ -8,3 +8,7 @@ export const preGenerateObjectId = (): string => {
     // IMPORTANT Backend is expecting this format.
     return `preId_${uniqueId}`;
 };
+
+export const countCharacteres = (text: string): number => {
+    return text.trim().length
+}

@@ -11,7 +11,9 @@ export default function AcademyLayout({
         <TooltipProvider>
             <SidebarProvider>
                 <AppSidebar />
-                {children}
+                <div className="w-full p-4">
+                    {children}
+                </div>
             </SidebarProvider>
         </TooltipProvider>
     )
