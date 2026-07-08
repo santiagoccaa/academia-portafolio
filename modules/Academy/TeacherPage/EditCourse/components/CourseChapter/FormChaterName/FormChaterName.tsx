@@ -37,7 +37,7 @@ export const FormChaterName = ({ idCourse, setShowInputChapter, setChapterList, 
     const onSubmit = async (values: z.infer<typeof formSchema>) => {
         setLoading(true)
         try {
-            const res = await axios.post(`/api/course/${idCourse}/chapter`, {
+            const res = await axios.post(`/api/teacher/course/${idCourse}/chapter`, {
                 title: values.title
             })
 
@@ -53,24 +53,22 @@ export const FormChaterName = ({ idCourse, setShowInputChapter, setChapterList, 
     }
 
     return (
-        <Form {...form}>
-            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4 mb-4">
-                <Controller
-                    control={form.control}
-                    name="title"
-                    render={({ field, fieldState }) => (
-                        <Field data-invalid={fieldState.invalid}>
-                            <Input placeholder="Ej: Introduccion a la programacion" {...field} />
+        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4 mb-4">
+            <Controller
+                control={form.control}
+                name="title"
+                render={({ field, fieldState }) => (
+                    <Field data-invalid={fieldState.invalid}>
+                        <Input placeholder="Ej: Introduccion a la programacion" {...field} />
 
-                            {fieldState.error && (
-                                <FieldError>{fieldState.error.message}</FieldError>
-                            )}
-                        </Field>
-                    )}
-                />
-                <Button type="submit" disabled={!form.formState.isValid || loading}>{t('common.save')}</Button>
-            </form>
-        </Form>
+                        {fieldState.error && (
+                            <FieldError>{fieldState.error.message}</FieldError>
+                        )}
+                    </Field>
+                )}
+            />
+            <Button type="submit" disabled={!form.formState.isValid || loading}>{t('common.save')}</Button>
+        </form>
     )
 }
 

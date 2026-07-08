@@ -52,7 +52,7 @@ export const CourseChapter = ({ chapters, idCourse }: CourseChapterProps) => {
     const onReorder = async (updateData: { id: string, position: number }[]) => {
 
         try {
-            await axios.put(`/api/course/${idCourse}/chapter/reorder`, {
+            await axios.put(`/api/teacher/course/${idCourse}/chapter/reorder`, {
                 list: updateData
             })
         } catch (error) {
@@ -61,7 +61,9 @@ export const CourseChapter = ({ chapters, idCourse }: CourseChapterProps) => {
     }
 
     const onEditChapter = (chapterId: string) => {
-        router.push(`/academy/teacher/${idCourse}/${chapterId}`)
+        console.log(chapterId);
+        
+        // router.push(`/academy/teacher/${idCourse}/${chapterId}`)
     }
 
     return (

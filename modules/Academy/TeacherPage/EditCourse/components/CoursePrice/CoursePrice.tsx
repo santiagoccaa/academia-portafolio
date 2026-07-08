@@ -22,7 +22,7 @@ export const CoursePrice = ({ idCourse, priceCourse }: CoursePriceProps) => {
 
     const onChangePrice = async () => {
         try {
-            axios.patch(`/api/course/${idCourse}`, {
+            axios.patch(`/api/teacher/course/${idCourse}`, {
                 price
             })
 

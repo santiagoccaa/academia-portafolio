@@ -34,3 +34,32 @@ export async function GET(req: Request, { params }: Params) {
         return NextResponse.json(null, { status: 500 })
     }
 }
+
+export async function PATCH(req: Request, { params }: Params) {
+    try {
+        const { userId } = await auth()
+        const { courseId } = await params
+        const values = await req.json()
+
+        if (!userId) {
+            return new NextResponse('Unauthorized', { status: 401 })
+        }
+
+        const course = await prisma.course.update({
+            where: {
+                id: courseId,
+                userId: userId
+            },
+            data: {
+                ...values
+            }
+        })
+
+        return NextResponse.json(course)
+
+    } catch (error) {
+        console.log("[COURSE PATCH]", error);
+
+        return new NextResponse('Internal Error', { status: 500 })
+    }
+}
