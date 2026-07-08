@@ -1,9 +1,11 @@
 "use client";
 
+import { EditCoursePage } from "@/modules/Academy";
 import { useCourse } from "@/store";
 import { useParams } from "next/navigation";
 
 export default function EditCourse() {
+
     const params = useParams();
 
     const slug = Array.isArray(params.slug)
@@ -24,9 +26,5 @@ export default function EditCourse() {
         );
     }
 
-    return (
-        <div>
-            Editando: {courseSelected.title}
-        </div>
-    );
+    return <EditCoursePage course={courseSelected} />
 }
