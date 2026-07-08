@@ -23,14 +23,16 @@ export const CourseImage = ({ idCourse, imageCourse }: CourseImageProps) => {
     const [image, setImage] = useState(imageCourse)
 
     const onChangeImage = async (imageUrl: string) => {
+        console.log("Imagen:", imageUrl);
+
         try {
-            axios.patch(`/api/teacher/course/${idCourse}`, {
+            await axios.patch(`/api/teacher/course/${idCourse}`, {
                 imageUrl
             })
 
             toast(t('alerts.alert13'))
         } catch (error) {
-            toast.error(t('alerts.error'))
+            toast.error("t('alerts.error')")
         }
     }
 
