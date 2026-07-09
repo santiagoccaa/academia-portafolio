@@ -36,10 +36,10 @@ export const useCourse = create<CourseState>((set) => ({
         });
     },
 
-    removeCourseBySlug: (slug) =>
+    removeCourseBySlug: (id) =>
         set((state) => ({
             coursesTeacherById: state.coursesTeacherById.filter(
-                (course) => course.slug !== slug
+                (course) => course.id !== id
             ),
         })),
 
