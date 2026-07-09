@@ -13,14 +13,11 @@ export default function Academy() {
     const getAllCourses = async () => {
       const allCourses = await axios.get('/api/courses')
 
-      console.log(allCourses.data);
-
       setCourses(allCourses.data)
-
     }
     
     getAllCourses()
   }, [])
 
-  return <CoursesPage />
+  return <CoursesPage courses={courses} />
 }
