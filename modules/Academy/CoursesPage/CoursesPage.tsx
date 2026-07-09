@@ -2,6 +2,8 @@ import { TitlePage } from "@/components/Shared"
 import { CalendarCheck, Rocket } from "lucide-react"
 
 export const CoursesPage = () => {
+
+    
     return (
         <div className="w-full space-y-4">
             <TitlePage
