@@ -3,7 +3,7 @@ import { create } from 'zustand'
 
 interface AcademyState {
     // Todos los cursos que ha creado el profesor
-    courses: CoursesCardHome[];
+    allCourses: CoursesCardHome[];
 
     // Funcion para buscar en la DB todos los cursos del profesor
     getAllCourses: (courses: CoursesCardHome | CoursesCardHome[]) => void;
@@ -11,11 +11,11 @@ interface AcademyState {
 }
 
 export const useAcademy = create<AcademyState>((set) => ({
-    courses: [],
+    allCourses: [],
 
     getAllCourses: (courses) => {
         set({
-            courses: Array.isArray(courses)
+            allCourses: Array.isArray(courses)
                 ? courses
                 : [courses],
         });
