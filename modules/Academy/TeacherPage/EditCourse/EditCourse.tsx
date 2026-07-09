@@ -1,45 +1,63 @@
 "use client"
 
-import { Course } from "@/app/generated/prisma/client"
-import { CourseChapter, CourseForm, CourseFormProps, CourseImage, CoursePrice, CourseWithRelations, HeaderCourse } from "./components"
+import { CourseChapter, CourseForm, CourseImage, CoursePrice, HeaderCourse } from "./components"
 import axios from "axios"
-import { useEffect, useState } from "react"
+import { useEffect } from "react"
+import { LoaderCircle } from "lucide-react"
+import { useCourse } from "@/store"
 
-interface EditCourseProp {
-    course: Course
+interface EditCoursePageProp {
+    id: string
 }
 
-export const EditCoursePage = ({ course }: EditCourseProp) => {
+export const EditCoursePage = ({ id }: EditCoursePageProp) => {
 
-    const { id } = course
-
-    const [courseInformation, setCourseInformation] = useState<CourseWithRelations>()
+    const { saveCourseSelected, courseSelected } = useCourse()
 
     useEffect(() => {
+        if (id === courseSelected?.id) return;
+
+        let cancelled = false;
+
         const fetchCourse = async () => {
-            const dataCourse = await axios.get(`/api/teacher/course/${id}`)
-            setCourseInformation(dataCourse.data)
-        }
+            try {
+                const { data } = await axios.get(`/api/teacher/course/${id}`);
 
-        fetchCourse()
-    }, [course])
+                if (!cancelled) {
+                    saveCourseSelected(data);
+                }
+            } catch (error) {
+                console.error(error);
+            }
+        };
 
+        fetchCourse();
 
-    if (!courseInformation) {
-        return <p>Este curso no existe.</p>
+        return () => {
+            cancelled = true;
+        };
+    }, [id, courseSelected?.id, saveCourseSelected]);
+
+    if (!courseSelected || courseSelected.id !== id) {
+        return (
+            <div className="w-full flex flex-col gap-2 justify-center items-center py-4">
+                <LoaderCircle size={40} className="animate-spin" />
+                <p className="text-xl font-medium">Cargando informacion del curso</p>
+            </div>
+        )
     }
 
     return (
         <div className="space-y-4">
-            <HeaderCourse idCourse={course.id} isPublished={course.isPublished} />
-            <CourseForm course={courseInformation} />
+            <HeaderCourse idCourse={courseSelected.id} isPublished={courseSelected.isPublished} />
+            <CourseForm course={courseSelected} />
 
             <div className="grid grid-cols-1 md:grid-cols-2 my-4 gap-4">
-                <CourseImage idCourse={course.id} imageCourse={course.imageUrl} />
-                <CoursePrice idCourse={course.id} priceCourse={course.price} />
+                <CourseImage idCourse={courseSelected.id} imageCourse={courseSelected.imageUrl} />
+                <CoursePrice idCourse={courseSelected.id} priceCourse={courseSelected.price} />
             </div>
 
-            <CourseChapter idCourse={course.id} chapters={courseInformation.chapters} />
+            <CourseChapter idCourse={courseSelected.id} chapters={courseSelected.chapters} />
         </div>
     )
 }

@@ -8,12 +8,12 @@ export const CourseCard = (course: Course) => {
 
     const t = useTranslations()
 
-    const { title, id, price, level, imageUrl, description, isPublished, slug } = course
+    const { title, id, price, level, imageUrl, description, isPublished } = course
     return (
         <div className="relative border border-gray-200 rounded-md p-4 w-full bg-white shadow-sm hover:shadow-md transition-shadow duration-300">
             <div className="flex flex-col lg:flex-row gap-4 items-center justify-between">
                 <div className="flex flex-col lg:flex-row gap-4 items-start">
-                    <Image src={imageUrl || '/image-default-course.webp'} alt="img curso" width={150} height={150} className="rounded-md max-w-52" />
+                    <Image src={imageUrl || '/image-default-course.webp'} alt="img curso" width={150} height={150} className="rounded-md max-w-52 max-h-20" />
                     <div>
                         <div className="flex items-center gap-2">
                             <h2 className="text-xl font-medium">{title}</h2>
@@ -42,7 +42,7 @@ export const CourseCard = (course: Course) => {
                     </div>
                 </div>
 
-                <Actions slug={slug} />
+                <Actions id={id} />
             </div>
         </div>
     )

@@ -23,7 +23,7 @@ export const FormCreateCourse = () => {
     const router = useRouter();
 
     const { userId } = useAuth()
-    const { getCoursesTeacherById, coursesTeacherById, getCourseTeacherSelected } = useCourse();
+    const { getCoursesTeacherById, coursesTeacherById } = useCourse();
 
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
@@ -65,8 +65,6 @@ export const FormCreateCourse = () => {
         }
 
         getCoursesTeacherById(newCourse);
-
-        getCourseTeacherSelected(newCourse)
 
         toast.success(t("alerts.alert18"));
 
