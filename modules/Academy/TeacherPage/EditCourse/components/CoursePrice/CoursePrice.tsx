@@ -8,19 +8,24 @@ import axios from "axios"
 import { toast } from "sonner"
 import { useTranslations } from "next-intl"
 import { TitlePage } from "@/components/Shared"
+import { useCourse } from "@/store"
 
 export type CoursePriceProps = {
-    idCourse:string
+    idCourse: string
     priceCourse: string | null
 }
 
 export const CoursePrice = ({ idCourse, priceCourse }: CoursePriceProps) => {
 
     const t = useTranslations()
+    const { updateCourse } = useCourse()
 
     const [price, setPrice] = useState<string | undefined>(priceCourse || "Gratis")
 
     const onChangePrice = async () => {
+        updateCourse(idCourse, {
+            price
+        })
         try {
             axios.patch(`/api/teacher/course/${idCourse}`, {
                 price

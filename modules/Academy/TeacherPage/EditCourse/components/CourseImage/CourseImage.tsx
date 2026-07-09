@@ -9,6 +9,7 @@ import axios from "axios"
 import { useTranslations } from "next-intl"
 import { TitlePage } from "@/components/Shared"
 import { UploadButton } from "@/utils/uploadthing"
+import { useCourse } from "@/store"
 
 export type CourseImageProps = {
     idCourse: string
@@ -18,12 +19,14 @@ export type CourseImageProps = {
 export const CourseImage = ({ idCourse, imageCourse }: CourseImageProps) => {
 
     const t = useTranslations()
+    const { updateCourse } = useCourse()
 
     const [isEditing, setIsEditing] = useState(false)
     const [image, setImage] = useState(imageCourse)
 
     const onChangeImage = async (imageUrl: string) => {
-        console.log("Imagen:", imageUrl);
+
+        updateCourse(idCourse, { imageUrl })
 
         try {
             await axios.patch(`/api/teacher/course/${idCourse}`, {
@@ -69,7 +72,7 @@ export const CourseImage = ({ idCourse, imageCourse }: CourseImageProps) => {
                         alt="curso image"
                         width={500}
                         height={250}
-                        className="w-full h-full rounded-md"
+                        className="w-full h-90 rounded-md"
                     />
             }
 

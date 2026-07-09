@@ -23,6 +23,7 @@ import { useTranslations } from "next-intl"
 import { Chapter, Course } from "@/app/generated/prisma/client"
 import { TitlePage } from "@/components/Shared"
 import { Field, FieldDescription, FieldError, FieldLabel } from "@/components/ui/field"
+import { useCourse } from "@/store"
 
 export type CourseWithRelations = Course & { chapters: Chapter[] }
 
@@ -33,6 +34,7 @@ export type CourseFormProps = {
 export const CourseForm = ({ course }: CourseFormProps) => {
 
     const t = useTranslations()
+    const { updateCourse } = useCourse()
 
     const [charactersDescription, setCharactersDescription] = useState(course.description?.length)
 
@@ -48,10 +50,19 @@ export const CourseForm = ({ course }: CourseFormProps) => {
     })
 
     const onSubmit = async (values: z.infer<typeof formSchema>) => {
+
+        const { category, level, title, description } = values
         try {
             if (!form.formState.isDirty) {
                 return
             }
+            updateCourse(course.id, {
+                title,
+                level,
+                category,
+                description
+            })
+            
             axios.patch(`/api/teacher/course/${course.id}`, values)
             form.reset(values)
 
