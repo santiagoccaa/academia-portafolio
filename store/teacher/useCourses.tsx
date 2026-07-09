@@ -49,6 +49,10 @@ export const useCourse = create<CourseState>((set) => ({
                 course.id === id
                     ? { ...course, ...data }
                     : course
-            )
+            ),
+            courseSelected:
+                state.courseSelected?.id === id
+                    ? { ...state.courseSelected, ...data }
+                    : state.courseSelected,
         })),
 }));
