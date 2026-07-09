@@ -17,6 +17,8 @@ import { useRouter } from "next/navigation"
 import axios from "axios"
 import { toast } from "sonner"
 import { useTranslations } from "next-intl"
+import Link from "next/link"
+import { useCourse } from "@/store"
 
 type ActionsProps = {
     id: string
@@ -25,22 +27,26 @@ type ActionsProps = {
 export const Actions = ({ id }: ActionsProps) => {
 
     const t = useTranslations()
-    const router = useRouter()
-
-    const onEdit = () => {
-        router.push(`/academy/teacher/${id}`)
-    }
+    const { removeCourseBySlug } = useCourse()
 
     const onDelete = () => {
-        axios.delete(`/api/course/${id}`)
-        toast(t('alerts.alert17'))
-        router.refresh()
+
+        removeCourseBySlug(id)
+        try {
+            axios.delete(`/api/teacher/course/${id}`)
+            toast(t('alerts.alert17'))
+
+        } catch (error) {
+            toast('No se pudo eliminar este curso')
+        }
     }
 
     return (
         <div className="flex flex-col gap-2 items-center w-full max-w-42">
-            <Button className="w-full" onClick={onEdit}>
-                {t('common.edit')} <Edit className="w-4 h-4" />
+            <Button className="w-full" asChild>
+                <Link href={`/academy/teacher/${id}`}>
+                    {t('common.edit')} <Edit className="w-4 h-4" />
+                </Link>
             </Button>
 
             <AlertDialog>
@@ -51,7 +57,7 @@ export const Actions = ({ id }: ActionsProps) => {
                     <AlertDialogHeader>
                         <AlertDialogTitle>{t('modal.deleteCourse.title')}</AlertDialogTitle>
                         <AlertDialogDescription>
-                           {t('modal.deleteCourse.message')}
+                            {t('modal.deleteCourse.message')}
                         </AlertDialogDescription>
                     </AlertDialogHeader>
                     <AlertDialogFooter>
