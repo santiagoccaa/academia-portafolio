@@ -12,3 +12,11 @@ export const preGenerateObjectId = (): string => {
 export const countCharacteres = (text: string): number => {
     return text.trim().length
 }
+
+export const formatDuration = (seconds: number) => {
+    const h = Math.floor(seconds / 3600)
+    const m = Math.floor((seconds % 3600) / 60)
+    const s = seconds % 60
+
+    return `${h}h ${m}m ${s}s`
+}
