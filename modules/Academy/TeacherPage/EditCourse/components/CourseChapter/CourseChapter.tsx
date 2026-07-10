@@ -1,18 +1,18 @@
 "use client"
 
-import { GripVertical, ListCheck, Loader2, Pencil, PlusCircle } from "lucide-react"
+import { GripVertical, ListCheck, Pencil, PlusCircle } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { useEffect, useState } from "react"
 import { DragDropContext, Droppable, DropResult, Draggable } from "@hello-pangea/dnd"
-import { useRouter } from "next/navigation"
 import axios from "axios"
 import { toast } from "sonner"
 import { useTranslations } from "next-intl"
 import { Chapter } from "@/app/generated/prisma/client"
 import { TitlePage } from "@/components/Shared"
 import { FormChaterName } from "./FormChaterName"
+import Link from "next/link"
 
-export type CourseChapterProps ={
+export type CourseChapterProps = {
     idCourse: string
     chapters: Chapter[] | null
 }
@@ -20,8 +20,6 @@ export type CourseChapterProps ={
 export const CourseChapter = ({ chapters, idCourse }: CourseChapterProps) => {
 
     const t = useTranslations()
-
-    const router = useRouter()
 
     const [chapterList, setChapterList] = useState(chapters ?? [])
     const [showInputChapter, setShowInputChapter] = useState(false)
@@ -59,13 +57,6 @@ export const CourseChapter = ({ chapters, idCourse }: CourseChapterProps) => {
             toast.error("Algo salio mal")
         }
     }
-
-    const onEditChapter = (chapterId: string) => {
-        console.log(chapterId);
-        
-        // router.push(`/academy/teacher/${idCourse}/${chapterId}`)
-    }
-
     return (
         <div className="space-y-4 h-fit relative">
             <TitlePage title={t("editCourse.courseForm.titleChapters")} icon={ListCheck} />
@@ -109,9 +100,9 @@ export const CourseChapter = ({ chapters, idCourse }: CourseChapterProps) => {
                                                             <p className="py-1 px-2 text-gray-700">{t('common.unpublished')}</p>
                                                         )
                                                     }
-                                                    <div className="cursor-pointer" onClick={() => onEditChapter(chapter.id)}>
+                                                    <Link href={`/academy/teacher/${idCourse}/${chapter.id}`}>
                                                         <Pencil className="w-4 h-4 text-gray-500" />
-                                                    </div>
+                                                    </Link>
                                                 </div>
                                             </div>
                                         )}
