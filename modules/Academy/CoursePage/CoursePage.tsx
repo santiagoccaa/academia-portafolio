@@ -1,14 +1,38 @@
-import { BreadCrumbCourse } from "./components"
+import { Chapter, Course, FeedbackCourse } from "@/app/generated/prisma/client"
+import { BreadCrumbCourse, HeroBlockCourse } from "./components"
 
-export const CoursePage = () => {
+export type CourseData = Course & {
+    chapters: Chapter[]
+    feedback?: FeedbackCourse[]
+    purchaseCourse: boolean
+}
+
+export interface CoursePageProps {
+    courseSeletect: CourseData
+}
+
+export const CoursePage = ({ courseSeletect }: CoursePageProps) => {
+
+    const { description, price, level, imageUrl, updateAt, slug, id, title, chapters, purchaseCourse } = courseSeletect
+
     return (
-        <div className="max-w-6xl mx-auto ">
-            <div className="my-4 mx-6 border rounded-lg bg-white p-6">
-                <BreadCrumbCourse title={"title"} />
-                {/* <HeroBlockCourse course={'infoCourse'} purchase={'purchaseCourse'} /> */}
+        <div className="space-y-4">
+            <div className="border rounded-md p-4 space-y-4">
+                <BreadCrumbCourse title={title} />
+                <HeroBlockCourse
+                    chapters={chapters}
+                    description={description ?? ''}
+                    imageUrl={imageUrl ?? ''}
+                    level={level ?? ''}
+                    price={price ?? ''}
+                    purchaseCourse={purchaseCourse}
+                    slug={slug}
+                    title={title}
+                    updateAt={updateAt}
+                />
             </div>
 
-            <div className="my-4 mx-6 border rounded-lg bg-white p-6">
+            <div className="border rounded-md p-4">
                 {/* <CourseContent chapters={chapters} /> */}
             </div>
             {/* {feedback &&
