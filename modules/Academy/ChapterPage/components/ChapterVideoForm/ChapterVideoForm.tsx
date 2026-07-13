@@ -52,7 +52,7 @@ export const ChapterVideoForm = ({ chapterId, courseId, videoUrl }: ChapterVideo
             }
 
             <div className="mt-4 p-2 rounded-md border">
-                <Button variant={"secondary"} onClick={() => setOnEditVideo(true)}>
+                <Button onClick={() => setOnEditVideo(true)}>
                     {onEditVideo ? t('editCourse.chapterForm.selectVideo') : t('editCourse.chapterForm.button')}
                     <Pencil className="w-4 h-4" />
                 </Button>
@@ -83,5 +83,3 @@ export const ChapterVideoForm = ({ chapterId, courseId, videoUrl }: ChapterVideo
         </div>
     )
 }
-
-export default ChapterVideoForm

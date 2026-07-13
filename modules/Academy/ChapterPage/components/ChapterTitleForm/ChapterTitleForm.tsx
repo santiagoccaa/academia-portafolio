@@ -13,6 +13,7 @@ import { useRouter } from "next/navigation"
 import { useTranslations } from "next-intl"
 import { Chapter } from "@/app/generated/prisma/client"
 import { Field, FieldDescription, FieldTitle } from "@/components/ui/field"
+import { EditorDescription } from "@/components/Shared"
 
 export type ChapterTitleFormProps = {
     courseId: string,
@@ -50,7 +51,7 @@ export const ChapterTitleForm = ({ chapter, courseId }: ChapterTitleFormProps) =
     }
 
     return (
-        <div className='rounded-md bg-white'>
+        <div className='rounded-md border p-2'>
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4 grid grid-cols-1 md:grid-cols-2 gap-6 items-start justify-start">
                 <div className="space-y-2">
                     <Controller
@@ -67,7 +68,8 @@ export const ChapterTitleForm = ({ chapter, courseId }: ChapterTitleFormProps) =
                         control={form.control}
                         name="isFree"
                         render={({ field }) => (
-                            <Field className="flex flex-row items-start space-x-3 space-y-0 rounded-md border p-4">
+                            <Field orientation="horizontal" className="rounded-md border p-2">
+                                
                                 <Checkbox checked={field.value} onCheckedChange={field.onChange} />
                                 <div className="space-y-1 leading-none">
                                     <FieldTitle>{t('editCourse.chapterForm.check')}</FieldTitle>
@@ -87,11 +89,10 @@ export const ChapterTitleForm = ({ chapter, courseId }: ChapterTitleFormProps) =
                     render={({ field }) => (
                         <Field>
                             <FieldTitle>{t('editCourse.chapterForm.formDescription')}</FieldTitle>
-                            {/* <EditorDescription  {...field} /> */}
+                            <EditorDescription  {...field} />
                         </Field>
                     )}
                 />
-
                 <div />
             </form>
         </div>
