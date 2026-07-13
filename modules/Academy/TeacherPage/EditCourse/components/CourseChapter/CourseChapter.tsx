@@ -11,41 +11,52 @@ import { Chapter } from "@/app/generated/prisma/client"
 import { TitlePage } from "@/components/Shared"
 import { FormChaterName } from "./FormChaterName"
 import Link from "next/link"
+import { useCourse } from "@/store"
 
 export type CourseChapterProps = {
     idCourse: string
-    chapters: Chapter[] | null
 }
 
-export const CourseChapter = ({ chapters, idCourse }: CourseChapterProps) => {
+export const CourseChapter = ({ idCourse }: CourseChapterProps) => {
 
     const t = useTranslations()
 
-    const [chapterList, setChapterList] = useState(chapters ?? [])
+    const { chaptersByCourse, getChaptersByCourse } = useCourse()
+
     const [showInputChapter, setShowInputChapter] = useState(false)
+    const [pendingOrder, setPendingOrder] = useState<
+        { id: string; position: number }[] | null
+    >(null);
 
     useEffect(() => {
-        setChapterList(chapters ?? [])
-    }, [chapters])
+        if (!pendingOrder) return;
+
+        const timer = setTimeout(() => {
+            onReorder(pendingOrder);
+        }, 2000);
+
+        return () => clearTimeout(timer);
+    }, [pendingOrder]);
 
     const onDragEnd = (result: DropResult) => {
-        if (!result.destination) return
+        if (!result.destination) return;
 
-        if (result.source.index === result.destination.index) return
+        if (result.source.index === result.destination.index) return;
 
-        const items = Array.from(chapterList)
-        const [reorderItem] = items.splice(result.source.index, 1)
-        items.splice(result.destination.index, 0, reorderItem)
+        const items = Array.from(chaptersByCourse);
 
-        setChapterList(items)
+        const [removed] = items.splice(result.source.index, 1);
+        items.splice(result.destination.index, 0, removed);
 
-        const bulkUpdate = items.map((chapter, index) => ({
-            id: chapter.id,
-            position: index
-        }))
+        getChaptersByCourse(items);
 
-        onReorder(bulkUpdate)
-    }
+        setPendingOrder(
+            items.map((chapter, index) => ({
+                id: chapter.id,
+                position: index,
+            }))
+        );
+    };
 
     const onReorder = async (updateData: { id: string, position: number }[]) => {
 
@@ -57,6 +68,7 @@ export const CourseChapter = ({ chapters, idCourse }: CourseChapterProps) => {
             toast.error("Algo salio mal")
         }
     }
+
     return (
         <div className="space-y-4 h-fit relative">
             <TitlePage title={t("editCourse.courseForm.titleChapters")} icon={ListCheck} />
@@ -69,14 +81,19 @@ export const CourseChapter = ({ chapters, idCourse }: CourseChapterProps) => {
                 </Button>
             </div>
 
-            {showInputChapter && <FormChaterName chapters={chapterList} setShowInputChapter={setShowInputChapter} setChapterList={setChapterList} idCourse={idCourse} />}
+            {showInputChapter && (
+                <FormChaterName
+                    setShowInputChapter={setShowInputChapter}
+                    idCourse={idCourse}
+                />)
+            }
 
             <DragDropContext onDragEnd={onDragEnd}>
                 <Droppable droppableId="chapters">
                     {(provider) => (
                         <div {...provider.droppableProps} ref={provider.innerRef} className="flex flex-col gap-2">
                             {
-                                chapterList?.map((chapter, index) => (
+                                chaptersByCourse?.map((chapter, index) => (
                                     <Draggable key={chapter.id} draggableId={chapter.id} index={index}>
                                         {(provider) => (
                                             <div

@@ -9,6 +9,7 @@ import { useTranslations } from "next-intl"
 import { useRouter } from "next/navigation"
 import { toast } from "sonner"
 import { ChapterTitleForm, ChapterVideoForm } from "./components"
+import { useCourse } from "@/store"
 
 interface ChapterProps {
     chapter: Chapter
@@ -18,6 +19,8 @@ export const ChapterPage = ({ chapter, courseId }: ChapterProps) => {
 
     const router = useRouter()
     const t = useTranslations()
+
+    const { removeChapterBySlug } = useCourse()
 
     const onPublis = async (state: boolean) => {
         try {
@@ -34,9 +37,11 @@ export const ChapterPage = ({ chapter, courseId }: ChapterProps) => {
     }
 
     const onRemoveChapter = async () => {
+        removeChapterBySlug(chapter.id)
+        toast(t('alerts.alert8'))
+
         try {
             await axios.delete(`/api/teacher/course/${courseId}/chapter/${chapter.id}`)
-            toast(t('alerts.alert8'))
 
             router.push(`/academy/teacher/${courseId}`)
 
@@ -52,7 +57,6 @@ export const ChapterPage = ({ chapter, courseId }: ChapterProps) => {
                     <ArrowLeft />
                     {t('editCourse.chapterForm.buttonHeader')}
                 </Button>
-
                 <div className="flex items-center gap-2">
                     {chapter.isPublised
                         ?

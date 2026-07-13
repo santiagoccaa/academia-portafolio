@@ -1,10 +1,13 @@
-import { Course } from '@/app/generated/prisma/client'
+import { Chapter, Course } from '@/app/generated/prisma/client'
 import { CourseWithRelations } from '@/modules/Academy/TeacherPage/EditCourse/components';
 import { create } from 'zustand'
 
 interface CourseState {
     // Todos los cursos que ha creado el profesor
     coursesTeacherById: Course[];
+
+    // Capitulos del curso seleccionado
+    chaptersByCourse: Chapter[]
 
     // Curso seleccionado para editar
     courseSelected: CourseWithRelations | null
@@ -20,11 +23,22 @@ interface CourseState {
 
     // Remover un curso usando el slug
     removeCourseBySlug: (slug: string) => void;
+
+    // Chapters
+
+    // Funcion para añadir los capitulos del curso al store
+    getChaptersByCourse: (chapters: Chapter[]) => void
+
+    // Añadir un capitulo al array
+    addChapter: (chapter: Chapter) => void;
+
+    removeChapterBySlug: (slug: string) => void
 }
 
 export const useCourse = create<CourseState>((set) => ({
     coursesTeacherById: [],
     courseSelected: null,
+    chaptersByCourse: [],
 
     saveCourseSelected: (course) => set({ courseSelected: course }),
 
@@ -35,6 +49,26 @@ export const useCourse = create<CourseState>((set) => ({
                 : [courses],
         });
     },
+
+    getChaptersByCourse: (chapters) => {
+        set({
+            chaptersByCourse: Array.isArray(chapters)
+                ? chapters
+                : [chapters],
+        });
+    },
+
+    addChapter: (chapter) =>
+        set((state) => ({
+            chaptersByCourse: [...state.chaptersByCourse, chapter],
+        })),
+
+    removeChapterBySlug: (id) =>
+        set((state) => ({
+            chaptersByCourse: state.chaptersByCourse.filter(
+                (chapter) => chapter.id !== id
+            ),
+        })),
 
     removeCourseBySlug: (id) =>
         set((state) => ({
