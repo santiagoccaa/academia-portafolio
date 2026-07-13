@@ -21,7 +21,7 @@ export const ChapterPage = ({ chapter, courseId }: ChapterProps) => {
 
     const onPublis = async (state: boolean) => {
         try {
-            await axios.patch(`/api/course/${courseId}/chapter/${chapter.id}`, {
+            await axios.patch(`/api/teacher/course/${courseId}/chapter/${chapter.id}`, {
                 isPublised: state
             })
 
@@ -35,7 +35,7 @@ export const ChapterPage = ({ chapter, courseId }: ChapterProps) => {
 
     const onRemoveChapter = async () => {
         try {
-            await axios.delete(`/api/course/${courseId}/chapter/${chapter.id}`)
+            await axios.delete(`/api/teacher/course/${courseId}/chapter/${chapter.id}`)
             toast(t('alerts.alert8'))
 
             router.push(`/academy/teacher/${courseId}`)
@@ -46,7 +46,7 @@ export const ChapterPage = ({ chapter, courseId }: ChapterProps) => {
     }
 
     return (
-        <>
+        <div className="space-y-4">
             <div className="border shadow p-2 rounded-md flex justify-between items-center">
                 <Button onClick={() => router.push(`/academy/teacher/${courseId}`)}>
                     <ArrowLeft />
@@ -58,7 +58,7 @@ export const ChapterPage = ({ chapter, courseId }: ChapterProps) => {
                         ?
                         (
                             <Button variant={"outline"} onClick={() => onPublis(false)}>
-                                {t('common.hide')} <EyeOff />
+                                {t('common.hidden')} <EyeOff />
                             </Button>
                         )
                         :
@@ -75,13 +75,11 @@ export const ChapterPage = ({ chapter, courseId }: ChapterProps) => {
                 </div>
             </div>
 
-            <div className="my-4 bg-white rounded-md flex justify-between items-center">
-                <TitlePage title={t("editCourse.chapterForm.title")} icon={Cog} />
-            </div>
+            <TitlePage title={t("editCourse.chapterForm.title")} icon={Cog} />
 
             <ChapterTitleForm courseId={courseId} chapter={chapter} />
 
             <ChapterVideoForm chapterId={chapter.id} courseId={courseId} videoUrl={chapter.videoUrl} />
-        </>
+        </div>
     )
 }

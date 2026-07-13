@@ -25,7 +25,7 @@ export const ChapterVideoForm = ({ chapterId, courseId, videoUrl }: ChapterVideo
 
     const onSubmit = async (url: string, duration: number) => {
         try {
-            await axios.patch(`/api/course/${courseId}/chapter/${chapterId}`, {
+            await axios.patch(`/api/teacher/course/${courseId}/chapter/${chapterId}`, {
                 videoUrl: url,
                 duration
             })
@@ -38,20 +38,21 @@ export const ChapterVideoForm = ({ chapterId, courseId, videoUrl }: ChapterVideo
     }
 
     return (
-        <div className="mt-6 bg-white rounded-md">
+        <>
             <TitlePage title={t("editCourse.chapterForm.titleVideo")} icon={Video} />
 
-            {videoUrl ?
-                (
-                    <video src={videoUrl} controls className="rounded-md max-w-96" />
-                )
-                :
-                (
-                    <p>{t('editCourse.chapterForm.messageVideo')}</p>
-                )
-            }
+            <div className="space-y-4 shadow border p-2 rounded-md">
 
-            <div className="mt-4 p-2 rounded-md border">
+                {videoUrl ?
+                    (
+                        <video src={videoUrl} controls className="rounded-md max-w-96 aspect-square" />
+                    )
+                    :
+                    (
+                        <p>{t('editCourse.chapterForm.messageVideo')}</p>
+                    )
+                }
+
                 <Button onClick={() => setOnEditVideo(true)}>
                     {onEditVideo ? t('editCourse.chapterForm.selectVideo') : t('editCourse.chapterForm.button')}
                     <Pencil className="w-4 h-4" />
@@ -80,6 +81,6 @@ export const ChapterVideoForm = ({ chapterId, courseId, videoUrl }: ChapterVideo
                     )
                 }
             </div>
-        </div>
+        </>
     )
 }
