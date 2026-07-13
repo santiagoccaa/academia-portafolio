@@ -47,9 +47,11 @@ export const EditCoursePage = ({ id }: EditCoursePageProp) => {
         )
     }
 
+    const chapters = courseSelected.chapters.length > 0 ? true : false
+
     return (
         <div className="space-y-4">
-            <HeaderCourse idCourse={courseSelected.id} isPublished={courseSelected.isPublished} />
+            <HeaderCourse containsChapter={chapters} idCourse={courseSelected.id} isPublished={courseSelected.isPublished} />
             <CourseForm course={courseSelected} />
 
             <div className="grid grid-cols-1 md:grid-cols-2 my-4 gap-4">

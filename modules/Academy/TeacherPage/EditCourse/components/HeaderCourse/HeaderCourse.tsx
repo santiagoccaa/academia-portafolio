@@ -13,9 +13,10 @@ import { useCourse } from "@/store"
 interface HeaderCourseProps {
     idCourse: string
     isPublished: boolean
+    containsChapter: boolean
 }
 
-export const HeaderCourse = ({ idCourse, isPublished }: HeaderCourseProps) => {
+export const HeaderCourse = ({ idCourse, isPublished, containsChapter }: HeaderCourseProps) => {
 
     const t = useTranslations()
     const { updateCourse } = useCourse()
@@ -59,7 +60,7 @@ export const HeaderCourse = ({ idCourse, isPublished }: HeaderCourseProps) => {
                 </Button>
 
                 <div className="flex gap-2 items-center">
-                    {
+                    {containsChapter && (
                         isPublished ?
                             <Button
                                 variant="outline"
@@ -75,7 +76,7 @@ export const HeaderCourse = ({ idCourse, isPublished }: HeaderCourseProps) => {
                             >
                                 {t('common.post')} <Eye />
                             </Button>
-                    }
+                    )}
 
                     <Button variant="destructive" onClick={onRemoveCourse}>
                         <Trash />
