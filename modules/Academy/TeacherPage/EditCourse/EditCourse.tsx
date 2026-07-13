@@ -12,7 +12,7 @@ interface EditCoursePageProp {
 
 export const EditCoursePage = ({ id }: EditCoursePageProp) => {
 
-    const { saveCourseSelected, courseSelected } = useCourse()
+    const { saveCourseSelected, courseSelected, getChaptersByCourse } = useCourse()
 
     useEffect(() => {
         if (id === courseSelected?.id) return;
@@ -25,6 +25,7 @@ export const EditCoursePage = ({ id }: EditCoursePageProp) => {
 
                 if (!cancelled) {
                     saveCourseSelected(data);
+                    getChaptersByCourse(data.chapters)
                 }
             } catch (error) {
                 console.error(error);
@@ -59,7 +60,7 @@ export const EditCoursePage = ({ id }: EditCoursePageProp) => {
                 <CoursePrice idCourse={courseSelected.id} priceCourse={courseSelected.price} />
             </div>
 
-            <CourseChapter idCourse={courseSelected.id} chapters={courseSelected.chapters} />
+            <CourseChapter idCourse={courseSelected.id} />
         </div>
     )
 }

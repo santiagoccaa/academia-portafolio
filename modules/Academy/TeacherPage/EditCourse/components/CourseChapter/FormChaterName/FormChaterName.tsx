@@ -6,9 +6,10 @@ import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
 import { useTranslations } from "next-intl"
 import { useState } from "react"
-import { Chapter } from "@/app/generated/prisma/client"
-import { Controller, Form, useForm } from "react-hook-form"
-import { Field, FieldDescription, FieldError, FieldLabel } from "@/components/ui/field"
+import { Controller, useForm } from "react-hook-form"
+import { Field, FieldError } from "@/components/ui/field"
+import { useCourse } from "@/store"
+import { preGenerateObjectId } from "@/utils"
 
 
 export const formSchema = z.object({
@@ -18,13 +19,13 @@ export const formSchema = z.object({
 export type FormChaterNameProps = {
     idCourse: string
     setShowInputChapter: React.Dispatch<React.SetStateAction<boolean>>
-    setChapterList: React.Dispatch<React.SetStateAction<Chapter[]>>
-    chapters: Chapter[]
 }
 
-export const FormChaterName = ({ idCourse, setShowInputChapter, setChapterList, chapters }: FormChaterNameProps) => {
+export const FormChaterName = ({ idCourse, setShowInputChapter }: FormChaterNameProps) => {
 
     const t = useTranslations()
+
+    const { addChapter, chaptersByCourse } = useCourse()
     const [loading, setLoading] = useState(false)
 
     const form = useForm<z.infer<typeof formSchema>>({
@@ -34,15 +35,33 @@ export const FormChaterName = ({ idCourse, setShowInputChapter, setChapterList, 
         },
     })
 
+    const lastChapter = chaptersByCourse[chaptersByCourse.length - 1];
+    const position = lastChapter ? lastChapter.position : 0;
+
     const onSubmit = async (values: z.infer<typeof formSchema>) => {
+
         setLoading(true)
+
+        addChapter({
+            courseId: idCourse,
+            id: preGenerateObjectId(),
+            title: values.title,
+            createdAt: new Date(),
+            description: "",
+            duration: 0,
+            isFree: false,
+            isPublised: false,
+            position: position + 1,
+            updateAt: new Date(),
+            videoUrl: ""
+        })
+        toast(t('alerts.alert11'))
+
         try {
-            const res = await axios.post(`/api/teacher/course/${idCourse}/chapter`, {
+            await axios.post(`/api/teacher/course/${idCourse}/chapter`, {
                 title: values.title
             })
 
-            setChapterList([...chapters, res.data])
-            toast(t('alerts.alert11'))
         } catch (error) {
             console.log(error);
             toast.error(t('alerts.error'))

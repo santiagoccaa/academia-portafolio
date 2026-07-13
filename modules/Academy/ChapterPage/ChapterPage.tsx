@@ -52,7 +52,6 @@ export const ChapterPage = ({ chapter, courseId }: ChapterProps) => {
                     <ArrowLeft />
                     {t('editCourse.chapterForm.buttonHeader')}
                 </Button>
-
                 <div className="flex items-center gap-2">
                     {chapter.isPublised
                         ?
