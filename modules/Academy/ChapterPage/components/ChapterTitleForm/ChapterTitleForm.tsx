@@ -37,7 +37,7 @@ export const ChapterTitleForm = ({ chapter, courseId }: ChapterTitleFormProps) =
 
     const onSubmit = async (values: z.infer<typeof formSchema>) => {
         try {
-            axios.patch(`/api/course/${courseId}/chapter/${chapter.id}`, {
+            axios.patch(`/api/teacher/course/${courseId}/chapter/${chapter.id}`, {
                 title: values.title,
                 description: values.description,
                 isFree: values.isFree
