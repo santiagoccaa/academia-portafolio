@@ -31,6 +31,8 @@ interface CourseState {
 
     // Añadir un capitulo al array
     addChapter: (chapter: Chapter) => void;
+
+    removeChapterBySlug: (slug: string) => void
 }
 
 export const useCourse = create<CourseState>((set) => ({
@@ -59,6 +61,13 @@ export const useCourse = create<CourseState>((set) => ({
     addChapter: (chapter) =>
         set((state) => ({
             chaptersByCourse: [...state.chaptersByCourse, chapter],
+        })),
+
+    removeChapterBySlug: (id) =>
+        set((state) => ({
+            chaptersByCourse: state.chaptersByCourse.filter(
+                (chapter) => chapter.id !== id
+            ),
         })),
 
     removeCourseBySlug: (id) =>
