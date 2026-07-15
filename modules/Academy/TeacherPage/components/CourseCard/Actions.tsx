@@ -21,19 +21,19 @@ import Link from "next/link"
 import { useCourse } from "@/store"
 
 type ActionsProps = {
-    id: string
+    courseSlug: string
 }
 
-export const Actions = ({ id }: ActionsProps) => {
+export const Actions = ({ courseSlug }: ActionsProps) => {
 
     const t = useTranslations()
     const { removeCourseBySlug } = useCourse()
 
     const onDelete = () => {
 
-        removeCourseBySlug(id)
+        removeCourseBySlug(courseSlug)
         try {
-            axios.delete(`/api/teacher/course/${id}`)
+            axios.delete(`/api/teacher/course/${courseSlug}`)
             toast(t('alerts.alert17'))
 
         } catch (error) {
@@ -44,7 +44,7 @@ export const Actions = ({ id }: ActionsProps) => {
     return (
         <div className="flex flex-col gap-2 items-center w-full max-w-42">
             <Button className="w-full" asChild>
-                <Link href={`/academy/teacher/${id}`}>
+                <Link href={`/academy/teacher/${courseSlug}`}>
                     {t('common.edit')} <Edit className="w-4 h-4" />
                 </Link>
             </Button>

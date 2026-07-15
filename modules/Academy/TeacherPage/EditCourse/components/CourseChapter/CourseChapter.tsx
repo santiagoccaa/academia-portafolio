@@ -14,10 +14,10 @@ import Link from "next/link"
 import { useCourse } from "@/store"
 
 export type CourseChapterProps = {
-    idCourse: string
+    courseSlug: string
 }
 
-export const CourseChapter = ({ idCourse }: CourseChapterProps) => {
+export const CourseChapter = ({ courseSlug }: CourseChapterProps) => {
 
     const t = useTranslations()
 
@@ -61,7 +61,7 @@ export const CourseChapter = ({ idCourse }: CourseChapterProps) => {
     const onReorder = async (updateData: { id: string, position: number }[]) => {
 
         try {
-            await axios.put(`/api/teacher/course/${idCourse}/chapter/reorder`, {
+            await axios.put(`/api/teacher/course/${courseSlug}/chapter/reorder`, {
                 list: updateData
             })
         } catch (error) {
@@ -84,7 +84,7 @@ export const CourseChapter = ({ idCourse }: CourseChapterProps) => {
             {showInputChapter && (
                 <FormChaterName
                     setShowInputChapter={setShowInputChapter}
-                    idCourse={idCourse}
+                    courseSlug={courseSlug}
                 />)
             }
 
@@ -117,7 +117,7 @@ export const CourseChapter = ({ idCourse }: CourseChapterProps) => {
                                                             <p className="py-1 px-2 text-gray-700">{t('common.unpublished')}</p>
                                                         )
                                                     }
-                                                    <Link href={`/academy/teacher/${idCourse}/${chapter.id}`}>
+                                                    <Link href={`/academy/teacher/${courseSlug}/${chapter.slug}`}>
                                                         <Pencil className="w-4 h-4 text-gray-500" />
                                                     </Link>
                                                 </div>

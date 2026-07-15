@@ -11,11 +11,11 @@ import { TitlePage } from "@/components/Shared"
 import { useCourse } from "@/store"
 
 export type CoursePriceProps = {
-    idCourse: string
+    courseSlug: string
     priceCourse: string | null
 }
 
-export const CoursePrice = ({ idCourse, priceCourse }: CoursePriceProps) => {
+export const CoursePrice = ({ courseSlug, priceCourse }: CoursePriceProps) => {
 
     const t = useTranslations()
     const { updateCourse } = useCourse()
@@ -23,11 +23,11 @@ export const CoursePrice = ({ idCourse, priceCourse }: CoursePriceProps) => {
     const [price, setPrice] = useState<string | undefined>(priceCourse || "Gratis")
 
     const onChangePrice = async () => {
-        updateCourse(idCourse, {
+        updateCourse(courseSlug, {
             price
         })
         try {
-            axios.patch(`/api/teacher/course/${idCourse}`, {
+            axios.patch(`/api/teacher/course/${courseSlug}`, {
                 price
             })
 

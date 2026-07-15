@@ -3,21 +3,21 @@ import { auth } from "@clerk/nextjs/server";
 import { NextResponse } from "next/server";
 
 interface Params {
-    params: Promise<{ courseId: string }>
+    params: Promise<{ courseSlug: string }>
 }
 
 export async function GET(req: Request, { params }: Params) {
     const { userId } = await auth()
 
     try {
-        const { courseId } = await params
+        const { courseSlug } = await params
         if (!userId) {
             return new NextResponse('Unauthorized', { status: 401 })
         }
 
         const courseEdit = await prisma.course.findUnique({
             where: {
-                id: courseId,
+                slug: courseSlug,
                 userId
             },
             include: {
@@ -42,11 +42,11 @@ export async function DELETE(req: Request, { params }: Params) {
             return new NextResponse('Unauthorized', { status: 401 })
         }
 
-        const { courseId } = await params
+        const { courseSlug } = await params
 
         const course = await prisma.course.delete({
             where: {
-                id: courseId,
+                slug: courseSlug,
                 userId: userId
             }
         })
@@ -62,7 +62,7 @@ export async function DELETE(req: Request, { params }: Params) {
 export async function PATCH(req: Request, { params }: Params) {
     try {
         const { userId } = await auth()
-        const { courseId } = await params
+        const { courseSlug } = await params
         const values = await req.json()
 
         if (!userId) {
@@ -71,7 +71,7 @@ export async function PATCH(req: Request, { params }: Params) {
 
         const course = await prisma.course.update({
             where: {
-                id: courseId,
+                slug: courseSlug,
                 userId: userId
             },
             data: {

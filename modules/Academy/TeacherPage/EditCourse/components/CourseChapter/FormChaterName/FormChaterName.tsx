@@ -17,15 +17,15 @@ export const formSchema = z.object({
 })
 
 export type FormChaterNameProps = {
-    idCourse: string
+    courseSlug: string
     setShowInputChapter: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-export const FormChaterName = ({ idCourse, setShowInputChapter }: FormChaterNameProps) => {
+export const FormChaterName = ({ courseSlug, setShowInputChapter }: FormChaterNameProps) => {
 
     const t = useTranslations()
 
-    const { addChapter, chaptersByCourse } = useCourse()
+    const { addChapter, chaptersByCourse, courseSelected } = useCourse()
     const [loading, setLoading] = useState(false)
 
     const form = useForm<z.infer<typeof formSchema>>({
@@ -42,8 +42,10 @@ export const FormChaterName = ({ idCourse, setShowInputChapter }: FormChaterName
 
         setLoading(true)
 
+        const slugCourse = values.title.replaceAll(' ', '-').toLocaleLowerCase()
+
         addChapter({
-            courseId: idCourse,
+            courseId: preGenerateObjectId(),
             id: preGenerateObjectId(),
             title: values.title,
             createdAt: new Date(),
@@ -53,13 +55,14 @@ export const FormChaterName = ({ idCourse, setShowInputChapter }: FormChaterName
             isPublised: false,
             position: position + 1,
             updateAt: new Date(),
-            videoUrl: ""
+            videoUrl: "",
+            slug: slugCourse
         })
         toast(t('alerts.alert11'))
 
         try {
-            await axios.post(`/api/teacher/course/${idCourse}/chapter`, {
-                title: values.title
+            await axios.post(`/api/teacher/course/${courseSlug}/chapter`, {
+                title: values.title,
             })
 
         } catch (error) {

@@ -1,11 +1,13 @@
-"use client";
 
 import { EditCoursePage } from "@/modules/Academy";
-import { useParams } from "next/navigation";
 
-export default function EditCourse() {
+interface Params {
+    params: Promise<{ slug: string }>
+}
 
-    const { slug } = useParams()
+export default async function EditCourse({ params }: Params) {
 
-    return <EditCoursePage id={slug as string} />
+    const { slug } = await params
+
+    return <EditCoursePage courseSlug={slug} />
 }

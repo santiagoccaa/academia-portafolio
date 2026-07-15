@@ -12,11 +12,11 @@ import { UploadButton } from "@/utils/uploadthing"
 import { useCourse } from "@/store"
 
 export type CourseImageProps = {
-    idCourse: string
+    courseSlug: string
     imageCourse: string | null
 }
 
-export const CourseImage = ({ idCourse, imageCourse }: CourseImageProps) => {
+export const CourseImage = ({ courseSlug, imageCourse }: CourseImageProps) => {
 
     const t = useTranslations()
     const { updateCourse } = useCourse()
@@ -26,10 +26,10 @@ export const CourseImage = ({ idCourse, imageCourse }: CourseImageProps) => {
 
     const onChangeImage = async (imageUrl: string) => {
 
-        updateCourse(idCourse, { imageUrl })
+        updateCourse(courseSlug, { imageUrl })
 
         try {
-            await axios.patch(`/api/teacher/course/${idCourse}`, {
+            await axios.patch(`/api/teacher/course/${courseSlug}`, {
                 imageUrl
             })
 

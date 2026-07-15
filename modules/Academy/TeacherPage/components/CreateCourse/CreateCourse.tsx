@@ -68,7 +68,8 @@ export const FormCreateCourse = () => {
 
         toast.success(t("alerts.alert18"));
 
-        router.push(`/academy/teacher/${slug}`);
+        // TODO
+        // router.push(`/academy/teacher/${slug}`);
 
         try {
             await axios.post("/api/teacher/course", values);
