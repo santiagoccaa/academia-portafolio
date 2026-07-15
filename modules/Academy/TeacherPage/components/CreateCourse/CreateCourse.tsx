@@ -20,10 +20,9 @@ import { useAuth } from "@clerk/nextjs";
 
 export const FormCreateCourse = () => {
     const t = useTranslations();
-    const router = useRouter();
 
     const { userId } = useAuth()
-    const { getCoursesTeacherById, coursesTeacherById } = useCourse();
+    const { addCourse, coursesTeacherById } = useCourse();
 
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
@@ -64,7 +63,7 @@ export const FormCreateCourse = () => {
             updateAt: new Date(),
         }
 
-        getCoursesTeacherById(newCourse);
+        addCourse(newCourse);
 
         toast.success(t("alerts.alert18"));
 

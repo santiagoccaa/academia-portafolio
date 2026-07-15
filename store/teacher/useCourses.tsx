@@ -18,6 +18,9 @@ interface CourseState {
     // Funcion para buscar en la DB todos los cursos del profesor
     getCoursesTeacherById: (courses: Course | Course[]) => void;
 
+    // Añadir un unico curso al array
+    addCourse: (course: Course) => void
+
     // Actualizar la informacion de un curso (informacion del state)
     updateCourse: (slug: string, data: Partial<Course>) => void;
 
@@ -57,7 +60,9 @@ export const useCourse = create<CourseState>((set) => ({
                 : [chapters],
         });
     },
-
+    
+    addCourse: (course) => set((state) => ({ coursesTeacherById: [...state.coursesTeacherById, course] })),
+    
     addChapter: (chapter) =>
         set((state) => ({
             chaptersByCourse: [...state.chaptersByCourse, chapter],
