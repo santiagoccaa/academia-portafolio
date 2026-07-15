@@ -19,7 +19,7 @@ interface CourseState {
     getCoursesTeacherById: (courses: Course | Course[]) => void;
 
     // Actualizar la informacion de un curso (informacion del state)
-    updateCourse: (id: string, data: Partial<Course>) => void;
+    updateCourse: (slug: string, data: Partial<Course>) => void;
 
     // Remover un curso usando el slug
     removeCourseBySlug: (slug: string) => void;
@@ -63,29 +63,29 @@ export const useCourse = create<CourseState>((set) => ({
             chaptersByCourse: [...state.chaptersByCourse, chapter],
         })),
 
-    removeChapterBySlug: (id) =>
+    removeChapterBySlug: (slug) =>
         set((state) => ({
             chaptersByCourse: state.chaptersByCourse.filter(
-                (chapter) => chapter.id !== id
+                (chapter) => chapter.slug !== slug
             ),
         })),
 
-    removeCourseBySlug: (id) =>
+    removeCourseBySlug: (slug) =>
         set((state) => ({
             coursesTeacherById: state.coursesTeacherById.filter(
-                (course) => course.id !== id
+                (course) => course.slug !== slug
             ),
         })),
 
-    updateCourse: (id, data) =>
+    updateCourse: (slug, data) =>
         set((state) => ({
             coursesTeacherById: state.coursesTeacherById.map((course) =>
-                course.id === id
+                course.slug === slug
                     ? { ...course, ...data }
                     : course
             ),
             courseSelected:
-                state.courseSelected?.id === id
+                state.courseSelected?.slug === slug
                     ? { ...state.courseSelected, ...data }
                     : state.courseSelected,
         })),

@@ -38,7 +38,6 @@ export const TeacherPage = ({ courses }: CourseListProps) => {
                     </DialogContent>
                 </Dialog>
             </TitlePage>
-
             {courses.map((course) => (
                 <CourseCard key={course.id} {...course} />
             ))}

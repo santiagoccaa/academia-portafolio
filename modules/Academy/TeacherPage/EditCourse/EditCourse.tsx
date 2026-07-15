@@ -7,21 +7,21 @@ import { LoaderCircle } from "lucide-react"
 import { useCourse } from "@/store"
 
 interface EditCoursePageProp {
-    id: string
+    courseSlug: string
 }
 
-export const EditCoursePage = ({ id }: EditCoursePageProp) => {
+export const EditCoursePage = ({ courseSlug }: EditCoursePageProp) => {
 
     const { saveCourseSelected, courseSelected, getChaptersByCourse } = useCourse()
 
     useEffect(() => {
-        if (id === courseSelected?.id) return;
+        if (courseSlug === courseSelected?.slug) return;
 
         let cancelled = false;
 
         const fetchCourse = async () => {
             try {
-                const { data } = await axios.get(`/api/teacher/course/${id}`);
+                const { data } = await axios.get(`/api/teacher/course/${courseSlug}`);
 
                 if (!cancelled) {
                     saveCourseSelected(data);
@@ -37,9 +37,9 @@ export const EditCoursePage = ({ id }: EditCoursePageProp) => {
         return () => {
             cancelled = true;
         };
-    }, [id, courseSelected?.id, saveCourseSelected]);
+    }, [courseSlug, courseSelected?.slug, saveCourseSelected]);
 
-    if (!courseSelected || courseSelected.id !== id) {
+    if (!courseSelected || courseSelected.slug !== courseSlug) {
         return (
             <div className="w-full flex flex-col gap-2 justify-center items-center py-4">
                 <LoaderCircle size={40} className="animate-spin" />
@@ -52,15 +52,22 @@ export const EditCoursePage = ({ id }: EditCoursePageProp) => {
 
     return (
         <div className="space-y-4">
-            <HeaderCourse containsChapter={chapters} idCourse={courseSelected.id} isPublished={courseSelected.isPublished} />
-            <CourseForm course={courseSelected} />
+            <HeaderCourse
+                containsChapter={chapters}
+                idCourse={courseSelected.slug}
+                isPublished={courseSelected.isPublished}
+            />
+
+            <CourseForm
+                course={courseSelected}
+            />
 
             <div className="grid grid-cols-1 md:grid-cols-2 my-4 gap-4">
-                <CourseImage idCourse={courseSelected.id} imageCourse={courseSelected.imageUrl} />
-                <CoursePrice idCourse={courseSelected.id} priceCourse={courseSelected.price} />
+                <CourseImage courseSlug={courseSelected.slug} imageCourse={courseSelected.imageUrl} />
+                <CoursePrice courseSlug={courseSelected.slug} priceCourse={courseSelected.price} />
             </div>
 
-            <CourseChapter idCourse={courseSelected.id} />
+            <CourseChapter courseSlug={courseSelected.slug} />
         </div>
     )
 }

@@ -56,14 +56,14 @@ export const CourseForm = ({ course }: CourseFormProps) => {
             if (!form.formState.isDirty) {
                 return
             }
-            updateCourse(course.id, {
+            updateCourse(course.slug, {
                 title,
                 level,
                 category,
                 description
             })
             
-            axios.patch(`/api/teacher/course/${course.id}`, values)
+            axios.patch(`/api/teacher/course/${course.slug}`, values)
             form.reset(values)
 
             toast(t('alerts.alert12'))
