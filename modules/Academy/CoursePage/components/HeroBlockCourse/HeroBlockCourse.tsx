@@ -53,7 +53,7 @@ export const HeroBlockCourse = ({ description, price, level, imageUrl, updateAt,
                             className='hover:bg-primary text-white font-semibold'
                             asChild
                         >
-                            <Link href={`/academy/courses/${slug}/${chapters[0].id}`}>
+                            <Link href={`/academy/courses/${slug}/${chapters[0].slug}`}>
                                 {t('infoCourse.viewCourse')}
                             </Link>
                         </Button>
