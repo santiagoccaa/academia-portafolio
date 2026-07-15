@@ -64,7 +64,7 @@ export const FormCreateCourse = () => {
         }
 
         addCourse(newCourse);
-
+        
         toast.success(t("alerts.alert18"));
 
         // TODO

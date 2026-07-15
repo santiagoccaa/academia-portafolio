@@ -2,17 +2,16 @@ import prisma from "@/lib/prisma"
 import { ChapterPage } from "@/modules/Academy"
 
 interface Params {
-    params: Promise<{ slug: string, chapterId: string }>
+    params: Promise<{ slug: string, chapterSlug: string }>
 }
 
 export default async function Chapter({ params }: Params) {
 
-    const { chapterId, slug } = await params
+    const { chapterSlug, slug } = await params
 
     const chapter = await prisma.chapter.findUnique({
         where: {
-            id: chapterId,
-            courseId: slug
+            slug: chapterSlug,
         }
     })
 
