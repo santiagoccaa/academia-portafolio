@@ -3,14 +3,14 @@ import { auth } from "@clerk/nextjs/server"
 import { NextResponse } from "next/server"
 
 interface Params {
-    params: Promise<{ courseId: string }>
+    params: Promise<{ courseSlug: string }>
 }
 export async function PUT(req: Request, { params }: Params) {
     console.log("[REORDER]");
 
     try {
         const { userId } = await auth()
-        const { courseId } = await params
+        const { courseSlug } = await params
 
         const { list } = await req.json()
 
@@ -20,7 +20,7 @@ export async function PUT(req: Request, { params }: Params) {
 
         const course = await prisma.course.findUnique({
             where: {
-                id: courseId,
+                slug: courseSlug,
                 userId: userId
             }
         })

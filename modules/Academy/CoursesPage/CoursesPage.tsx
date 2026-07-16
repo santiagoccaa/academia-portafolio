@@ -19,7 +19,7 @@ export const CoursesPage = ({ courses }: CoursesPageProps) => {
         <div className="w-full space-y-4">
             <TitlePage
                 icon={Rocket}
-                title="Destacados"
+                title="Destacados"  
             />
 
             <Carousel>

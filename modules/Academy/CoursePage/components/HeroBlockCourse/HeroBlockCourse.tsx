@@ -32,7 +32,7 @@ export const HeroBlockCourse = ({ description, price, level, imageUrl, updateAt,
     const formatted = formatDuration(duration)
 
     return (
-        <div className='grid grid-cols-1 md:grid-cols-2 gap-4 mt-6'>
+        <div className='grid grid-cols-1 md:grid-cols-2 gap-4'>
             <div>
                 <h2 className='text-3xl font-semibold'>{title}</h2>
                 <p className='text-balance mt-2'>{description}</p>

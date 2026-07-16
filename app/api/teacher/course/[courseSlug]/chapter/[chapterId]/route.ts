@@ -3,13 +3,13 @@ import { auth } from "@clerk/nextjs/server"
 import { NextResponse } from "next/server"
 
 interface Params {
-    params: Promise<{ courseId: string, chapterId: string }>
+    params: Promise<{ courseSlug: string, chapterId: string }>
 }
 
-export async function PATCH(req: Request, { params }: { params: Promise<{ courseId: string, chapterId: string }> }) {
+export async function PATCH(req: Request, { params }: { params: Promise<{ courseSlug: string, chapterId: string }> }) {
     try {
         const { userId } = await auth()
-        const { courseId, chapterId } = await params
+        const { chapterId } = await params
 
         const values = await req.json()
 
@@ -20,7 +20,6 @@ export async function PATCH(req: Request, { params }: { params: Promise<{ course
         const chapter = await prisma.chapter.update({
             where: {
                 id: chapterId,
-                courseId
             },
             data: {
                 ...values
@@ -37,7 +36,7 @@ export async function PATCH(req: Request, { params }: { params: Promise<{ course
 export async function DELETE(req: Request, { params }: Params) {
     try {
         const { userId } = await auth()
-        const { courseId, chapterId } = await params
+        const { chapterId } = await params
 
         if (!userId) {
             return new NextResponse('Unathorized', { status: 401 })
@@ -45,8 +44,7 @@ export async function DELETE(req: Request, { params }: Params) {
 
         const chapter = await prisma.chapter.delete({
             where: {
-                id: chapterId,
-                courseId
+                id: chapterId
             }
         })
 
