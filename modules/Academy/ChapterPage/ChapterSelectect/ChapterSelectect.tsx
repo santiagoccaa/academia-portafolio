@@ -2,6 +2,7 @@
 
 import axios from "axios"
 import { useEffect, useState } from "react"
+import { InfoCourse } from "./components"
 
 interface ChapterSelectectProps {
     courseSlug: string
@@ -19,9 +20,17 @@ export const ChapterSelectect = ({ chapterCourse, courseSlug }: ChapterSelectect
         getCourse()
     }, [])
 
+    console.log(infoCourse);
+    if (!infoCourse) {
+        return <p>no hay</p>
+    }
+
     return (
         <div className="grid grid-cols-1 md:grid-cols-[60%_1fr] gap-4">
-            hola mundo
+            <InfoCourse
+                slugChapter={chapterCourse}
+                infoCourse={infoCourse}
+            />
         </div>
     )
 }

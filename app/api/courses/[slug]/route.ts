@@ -14,6 +14,7 @@ export async function GET(req: Request, { params }: Params) {
     try {
 
         const { slug } = await params
+        
         if (!userId) {
             return NextResponse.json('Unauthorized', { status: 401 })
         }
