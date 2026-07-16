@@ -27,9 +27,13 @@ export const ProgressCourse = ({ chapterCourseId, infoCourse }: ProgressCoursePr
 
     useEffect(() => {
         const getUserProgress = async () => {
-            const { data } = await axios.get('api/student/progress')
+            try {
+                const { data } = await axios.get('/api/student/progress')
 
-            setUserProgress(data)
+                setUserProgress(data)
+            } catch (error) {
+                console.log("USER PROGRESS:", error);
+            }
         }
 
         getUserProgress()
@@ -38,7 +42,7 @@ export const ProgressCourse = ({ chapterCourseId, infoCourse }: ProgressCoursePr
         if (progress) {
             setIsCompleted(progress.isCompleted)
         }
-    }, [chapterCourseId, userProgress])
+    }, [chapterCourseId])
 
 
     const totalChapters = chapters.length

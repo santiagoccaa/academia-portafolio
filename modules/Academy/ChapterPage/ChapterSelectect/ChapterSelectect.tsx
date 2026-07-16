@@ -2,7 +2,7 @@
 
 import axios from "axios"
 import { useEffect, useState } from "react"
-import { InfoCourse } from "./components"
+import { ChaptersCourse, InfoCourse } from "./components"
 
 interface ChapterSelectectProps {
     courseSlug: string
@@ -12,6 +12,7 @@ interface ChapterSelectectProps {
 export const ChapterSelectect = ({ chapterCourse, courseSlug }: ChapterSelectectProps) => {
 
     const [infoCourse, setInfoCourse] = useState()
+
     useEffect(() => {
         const getCourse = async () => {
             const { data } = await axios.get(`/api/courses/${courseSlug}`)
@@ -20,9 +21,8 @@ export const ChapterSelectect = ({ chapterCourse, courseSlug }: ChapterSelectect
         getCourse()
     }, [])
 
-    console.log(infoCourse);
     if (!infoCourse) {
-        return <p>no hay</p>
+        return <p>Buscando informacion</p>
     }
 
     return (
@@ -30,6 +30,12 @@ export const ChapterSelectect = ({ chapterCourse, courseSlug }: ChapterSelectect
             <InfoCourse
                 slugChapter={chapterCourse}
                 infoCourse={infoCourse}
+            />
+
+            <ChaptersCourse
+                chapters={infoCourse}
+                courseSlug={courseSlug}
+                chapterCourse={chapterCourse}
             />
         </div>
     )
