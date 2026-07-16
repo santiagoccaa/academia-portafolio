@@ -30,7 +30,6 @@ export const ChapterList = ({ chapters, courseSlug, currentChapter, userProgress
                                     <Eye className='w-4 h-4 shrink-0' />
                                     :
                                     <Lock className='w-4 h-4 shrink-0' />
-
                             }
                         </div>
                     </Link>

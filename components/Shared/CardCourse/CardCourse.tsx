@@ -15,6 +15,7 @@ export const CardCourse = (course: CoursesCardHome) => {
     const { _count, imageUrl, category, description, slug, createdAt, title, price, avgStars, courseAuthor, purchaseCourse } = course
     const { firstName, lastName } = courseAuthor
 
+    // TODO cambiar el link y eliminar /courses/
     return (
         <Link href={`/academy/courses/${slug}`} className="group">
             <Card>

@@ -5,13 +5,13 @@ import { NextResponse } from "next/server"
 
 
 interface Params {
-    params: Promise<{ courseId: string, chapterId: string }>
+    params: Promise<{ courseSlug: string, chapterId: string }>
 }
 
 export async function PATCH(req: Request, { params }: Params) {
 
     const { userId } = await auth()
-    const { chapterId, courseId } = await params
+    const { chapterId, courseSlug } = await params
 
     const { isCompleted } = await req.json()
 
@@ -24,11 +24,11 @@ export async function PATCH(req: Request, { params }: Params) {
             where: {
                 id: chapterId
             }, select: {
-                courseId: true
+                slug:true
             }
         })
 
-        if (!chapter || chapter.courseId != courseId) {
+        if (!chapter || chapter.slug != courseSlug) {
             return NextResponse.json({ message: "Chapter Not Found" }, { status: 404 })
         }
 

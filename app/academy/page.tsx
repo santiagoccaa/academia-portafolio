@@ -2,9 +2,8 @@
 
 import { CoursesPage } from "@/modules/Academy";
 import { useAcademy } from "@/store";
-import { CoursesCardHome } from "@/types";
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 
 export default function Academy() {
 
