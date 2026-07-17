@@ -1,25 +1,21 @@
 "use client"
 
+import { ChapterSelectectInfo } from "@/types"
 import axios from "axios"
 import { useEffect, useState } from "react"
-import { ChaptersCourse, InfoCourse, InfoCourseProps } from "./components"
-import { Chapter, Course, FeedbackCourse } from "@/app/generated/prisma/client"
 
 interface ChapterSelectectProps {
     courseSlug: string
     chapterCourse: string
 }
 
-type InformationCourse = Course & { chapters: Chapter[], feedback?: FeedbackCourse[], purchaseCourse: boolean }
-
-
 export const ChapterSelectect = ({ chapterCourse, courseSlug }: ChapterSelectectProps) => {
 
-    const [infoCourse, setInfoCourse] = useState<InformationCourse | null>(null)
+    const [infoCourse, setInfoCourse] = useState<ChapterSelectectInfo>()
 
     useEffect(() => {
         const getCourse = async () => {
-            const { data } = await axios.get(`/api/courses/${courseSlug}`)
+            const { data } = await axios.get(`/api/chapter/${chapterCourse}/${chapterCourse}`)
             setInfoCourse(data)
         }
         getCourse()
@@ -29,9 +25,12 @@ export const ChapterSelectect = ({ chapterCourse, courseSlug }: ChapterSelectect
         return <p>Buscando informacion</p>
     }
 
+    console.log("informacion:", infoCourse);
+
+
     return (
         <div className="grid grid-cols-1 md:grid-cols-[60%_1fr] gap-4">
-            <InfoCourse
+            {/* <InfoCourse
                 slugChapter={chapterCourse}
                 infoCourse={infoCourse}
             />
@@ -40,7 +39,7 @@ export const ChapterSelectect = ({ chapterCourse, courseSlug }: ChapterSelectect
                 chapters={infoCourse}
                 courseSlug={courseSlug}
                 chapterCourse={chapterCourse}
-            />
+            /> */}
         </div>
     )
 }

@@ -1,21 +1,20 @@
-import { FeedbackCourse } from "@/app/generated/prisma/client"
 import { StarRating } from "@/components/Shared";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { useTranslations } from "next-intl";
 import Image from "next/image";
 
-type User = {
-    firstName: string;
-    lastName: string;
-    imageUrl: string;
-};
-
-type FeedbackWithUser = FeedbackCourse & {
-    user: User;
-};
-
 export interface FeedbackeProps {
-    feedback: FeedbackWithUser[]
+    feedback: {
+        user: {
+            firstName: string;
+            lastName: string;
+            imageUrl: string;
+        };
+        userId: string;
+        description: string;
+        stars: number;
+        createdAt: Date
+    }[];
 }
 
 export const Feedback = ({ feedback }: FeedbackeProps) => {

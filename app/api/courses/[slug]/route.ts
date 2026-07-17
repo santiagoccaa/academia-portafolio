@@ -31,11 +31,22 @@ export async function GET(req: Request, { params }: Params) {
                     orderBy: {
                         position: "asc",
                     },
+                    select: {
+                        title: true,
+                        slug: true,
+                        duration: true
+                    }
                 },
                 feedback: {
                     orderBy: {
                         stars: "desc",
                     },
+                    select: {
+                        userId: true,
+                        description: true,
+                        stars: true,
+                        createdAt: true
+                    }
                 },
             },
         });

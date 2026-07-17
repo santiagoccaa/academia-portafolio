@@ -6,7 +6,6 @@ import { useTranslations } from 'next-intl'
 import { formatDuration } from '@/utils'
 import Link from 'next/link'
 import { Button } from '@/components/ui/button'
-import { Chapter, Course, FeedbackCourse } from '@/app/generated/prisma/client'
 
 interface HeroBlockCourse {
     description: string
@@ -14,14 +13,19 @@ interface HeroBlockCourse {
     level: string
     imageUrl: string
     updateAt: Date
+    chapterId: string
     slug: string
     title: string
-    chapters: Chapter[]
+    chapters: {
+        title: string,
+        slug: string,
+        duration: number
+    }[]
     purchaseCourse: boolean
 }
 
 
-export const HeroBlockCourse = ({ description, price, level, imageUrl, updateAt, slug, title, chapters, purchaseCourse }: HeroBlockCourse) => {
+export const HeroBlockCourse = ({ description, price, chapterId, level, imageUrl, updateAt, slug, title, chapters, purchaseCourse }: HeroBlockCourse) => {
 
     const t = useTranslations()
 
@@ -34,7 +38,7 @@ export const HeroBlockCourse = ({ description, price, level, imageUrl, updateAt,
     return (
         <div className='grid grid-cols-1 md:grid-cols-2 gap-4'>
             <div>
-                <h2 className='text-3xl font-semibold'>{title}</h2>
+                <h2 className='text-3xl font-semibold capitalize'>{title}</h2>
                 <p className='text-balance mt-2'>{description}</p>
 
                 <div className='flex flex-col gap-3 my-4 text-gray-600'>

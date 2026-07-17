@@ -1,8 +1,11 @@
 import { useTranslations } from 'next-intl'
-import { Chapter } from "@/app/generated/prisma/client"
 
 export type CourseContentProps = {
-    chapters: Chapter[]
+    chapters: {
+        title: string,
+        slug: string,
+        duration: number
+    }[]
 }
 
 export const CourseContent = ({ chapters }: CourseContentProps) => {
@@ -12,7 +15,7 @@ export const CourseContent = ({ chapters }: CourseContentProps) => {
             <h2 className='text-3xl font-semibold mb-4 pb-4'>{t('infoCourse.content')}</h2>
             <div className='space-y-6'>
                 {chapters.map((chapter, index) => (
-                    <div key={chapter.id} className='flex items-start space-x-4 border p-2 rounded-lg hover:bg-gray-100 transition-all'>
+                    <div key={index} className='flex items-start space-x-4 border p-2 rounded-lg hover:bg-gray-100 transition-all'>
                         <div className='shrink-0 bg-primary text-white font-semibold rounded-full w-8 h-8 flex items-center justify-center'>
                             {index + 1}
                         </div>
@@ -22,7 +25,9 @@ export const CourseContent = ({ chapters }: CourseContentProps) => {
                         </div>
 
                         <div className='shrink-0 flex items-center justify-center'>
-                            <span className={`px-2 py-1 text-xs rounded-full font-medium ${chapter.isPublised ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'}`}>{chapter.isPublised ? t('common.published') : 'Sin publicar'}</span>
+                            <span className='px-2 py-1 text-xs rounded-full font-medium bg-green-100 text-green-800'>
+                                {t('common.published')}
+                            </span>
                         </div>
                     </div>
                 ))}

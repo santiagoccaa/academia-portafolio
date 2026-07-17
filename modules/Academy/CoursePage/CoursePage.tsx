@@ -1,29 +1,13 @@
-import { Chapter, Course, FeedbackCourse } from "@/app/generated/prisma/client"
 import { BreadCrumbCourse, CourseContent, Feedback, HeroBlockCourse } from "./components"
-
-type User = {
-    firstName: string;
-    lastName: string;
-    imageUrl: string;
-};
-
-type FeedbackWithUser = FeedbackCourse & {
-    user: User;
-};
-
-export type CourseData = Course & {
-    chapters: Chapter[]
-    feedback?: FeedbackWithUser[]
-    purchaseCourse: boolean
-}
+import { AllInformationCourse } from "@/types";
 
 export interface CoursePageProps {
-    courseSeletect: CourseData
+    courseSeletect: AllInformationCourse
 }
 
 export const CoursePage = ({ courseSeletect }: CoursePageProps) => {
 
-    const { description, price, level, imageUrl, updateAt, slug, feedback, title, chapters, purchaseCourse } = courseSeletect
+    const { description, price, level, imageUrl, updateAt, slug, feedback, title, chapters, purchaseCourse, id } = courseSeletect
 
     return (
         <div className="space-y-4">
@@ -33,6 +17,7 @@ export const CoursePage = ({ courseSeletect }: CoursePageProps) => {
 
             <div className="border rounded-md p-4 space-y-4">
                 <HeroBlockCourse
+                    chapterId={id}
                     chapters={chapters}
                     description={description ?? ''}
                     imageUrl={imageUrl ?? ''}
