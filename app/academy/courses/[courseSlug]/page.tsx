@@ -2,12 +2,11 @@
 
 import { CoursePage, CourseData } from '@/modules/Academy'
 import axios from 'axios'
-import { useParams, useRouter } from 'next/navigation'
+import { useParams } from 'next/navigation'
 import { useEffect, useState } from 'react'
 
 export default function Course() {
 
-    const router = useRouter()
     const { courseSlug } = useParams()
     const [course, setCourse] = useState<CourseData | null>(null)
     const [loading, setLoading] = useState(true)
