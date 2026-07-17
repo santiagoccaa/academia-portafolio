@@ -49,7 +49,7 @@ export const CoursePage = ({ courseSeletect }: CoursePageProps) => {
                 <CourseContent chapters={chapters} />
             </div>
 
-            {feedback && <Feedback feedback={feedback} />}
+            {feedback && feedback.length > 0 && <Feedback feedback={feedback} />}
         </div>
     )
 }

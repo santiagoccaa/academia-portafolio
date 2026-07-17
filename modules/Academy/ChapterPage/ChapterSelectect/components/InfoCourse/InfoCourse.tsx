@@ -9,12 +9,16 @@ export type InfoCourseProps = {
     slugChapter: string
 }
 
-export const InfoCourse = ({ infoCourse, slugChapter}: InfoCourseProps) => {
+export const InfoCourse = ({ infoCourse, slugChapter }: InfoCourseProps) => {
 
-    const { title, category, description, id, feedback } = infoCourse
+    const { title, category, description, feedback } = infoCourse
 
     const videoUrl = infoCourse.chapters.find((chapter) => chapter.slug === slugChapter)?.videoUrl
-    const chapterCourseId  = infoCourse.chapters.find((chapter) => chapter.slug === slugChapter)?.id
+    const chapterCourseId = infoCourse.chapters.find((chapter) => chapter.slug === slugChapter)?.id
+    
+    // const feedbackUser = feedback?.some((feed) => feed.)
+
+    console.log("Feedback", feedback && feedback.length > 0 ? "existe" : "no existe");
 
     return (
         <div className='w-full relative'>
@@ -40,7 +44,10 @@ export const InfoCourse = ({ infoCourse, slugChapter}: InfoCourseProps) => {
                 <p className='text-gray-600 text-sm'>{description}</p>
             </div>
 
-            <FeedbackUserCourse id={id} feedback={feedback && feedback[0]} />
+            {/* {feedback ?
+                <FeedbackUserCourse id={id} feedback={feedback && feedback[0]} />
+                : <p>hola</p>
+            } */}
         </div>
     )
 }

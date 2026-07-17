@@ -50,7 +50,7 @@ model CourseAuthor {
 model FeedbackCourse {
   id          String  @id @default(uuid())
   userId      String
-  description String? @db.Text
+  description String @db.Text
   stars       Int
 
   createdAt DateTime @default(now())

@@ -15,8 +15,8 @@ import { Field } from "@/components/ui/field"
 
 interface FormFedbackProps {
     id: string
-    stars?: number
-    description?: string
+    stars: number
+    description: string
     setEdit: React.Dispatch<React.SetStateAction<boolean>>
     setDescription: React.Dispatch<React.SetStateAction<string>>
     setStarts: React.Dispatch<React.SetStateAction<number>>
@@ -37,7 +37,7 @@ export const FormFedbackCourse = ({ id, description, stars, setEdit, setStarts, 
     const onSubmit = async (values: z.infer<typeof formSchema>) => {
         const { description, stars } = values
         try {
-            await axios.post(`/api/course/${id}/feedback`, { description, stars })
+            await axios.post(`/api/feedback/${id}/`, { description, stars })
             toast(t('alerts.alert1'))
         } catch (error) {
             toast.error(t('alerts.alert1'))
