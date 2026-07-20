@@ -55,7 +55,6 @@ export async function GET(req: Request, { params }: Params) {
                             stars: true,
                             userId: true,
                             description: true,
-                            title: true,
                         }
                     }
                 }
