@@ -28,6 +28,9 @@ model Course {
   purchases Purchase[]
   feedback  FeedbackCourse[]
 
+  averageRating Float @default(0)
+  feedbackCount Int   @default(0)
+
   courseAuthor CourseAuthor @relation(fields: [userId], references: [userId], onDelete: Cascade)
 
   createdAt DateTime @default(now())
@@ -48,8 +51,13 @@ model CourseAuthor {
 }
 
 model FeedbackCourse {
-  id          String  @id @default(uuid())
-  userId      String
+  id     String @id @default(uuid())
+  userId String
+
+  firstName String
+  lastName  String
+  imageUrl  String
+
   description String @db.Text
   stars       Int
 
