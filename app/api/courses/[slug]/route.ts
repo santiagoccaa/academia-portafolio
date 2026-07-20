@@ -18,27 +18,48 @@ export async function GET(req: Request, { params }: Params) {
             return NextResponse.json("Unauthorized", { status: 401 });
         }
 
-        const course = await prisma.course.findUnique({
-            where: {
-                slug,
-                isPublished: true,
-            },
-            include: {
-                chapters: {
-                    where: {
-                        isPublised: true,
-                    },
-                    orderBy: {
-                        position: "asc",
-                    },
+        const course = await prisma.course.findUnique(
+            {
+                where: {
+                    slug,
+                    isPublished: true,
                 },
-                feedback: {
-                    orderBy: {
-                        stars: "desc",
+                select: {
+                    id: true,
+                    title: true,
+                    description: true,
+                    price: true,
+                    imageUrl: true,
+                    userId: true,
+                    level:true,
+                    updateAt: true,
+                    slug: true,
+                    chapters: {
+                        where: {
+                            isPublised: true,
+                        },
+                        orderBy: {
+                            position: "asc",
+                        },
+                        select: {
+                            slug: true,
+                            title: true,
+                            duration: true,
+                        },
                     },
-                },
-            },
-        });
+                    feedback: {
+                        orderBy: {
+                            stars: "desc",
+                        },
+                        select: {
+                            stars: true,
+                            userId: true,
+                            description: true,
+                            title: true,
+                        }
+                    }
+                }
+            });
 
         if (!course) {
             return NextResponse.json("COURSE NOT FOUND", { status: 404 });
