@@ -16,7 +16,11 @@ interface HeroBlockCourse {
     updateAt: Date
     slug: string
     title: string
-    chapters: Chapter[]
+    chapters: {
+        slug: string;
+        title: string;
+        duration: number;
+    }[];
     purchaseCourse: boolean
 }
 

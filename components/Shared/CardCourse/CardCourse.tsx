@@ -7,17 +7,24 @@ import { StarRating } from "../StarRating"
 import { useTranslations } from "next-intl"
 import { formatPrice } from "@/lib/formatPrice"
 import { CoursesCardHome } from "@/types"
+import { useAcademy } from "@/store/academy/useAcademy"
 
 export const CardCourse = (course: CoursesCardHome) => {
 
     const t = useTranslations()
+
+    const { getCourseSelected } = useAcademy()
 
     const { _count, imageUrl, category, description, slug, createdAt, title, price, avgStars, courseAuthor, purchaseCourse } = course
     const { firstName, lastName } = courseAuthor
 
     // TODO cambiar el link y eliminar /courses/
     return (
-        <Link href={`/academy/courses/${slug}`} className="group">
+        <Link
+            href={`/academy/courses/${slug}`}
+            className="group" onClick={() =>
+                getCourseSelected(course)}
+        >
             <Card>
                 <CardHeader className="relative">
 

@@ -1,6 +1,7 @@
 "use client"
 
-import { CoursePage, CourseData } from '@/modules/Academy'
+import { CoursePage } from '@/modules/Academy'
+import { CoursePageProps } from '@/types'
 import axios from 'axios'
 import { useParams } from 'next/navigation'
 import { useEffect, useState } from 'react'
@@ -8,7 +9,7 @@ import { useEffect, useState } from 'react'
 export default function Course() {
 
     const { courseSlug } = useParams()
-    const [course, setCourse] = useState<CourseData | null>(null)
+    const [course, setCourse] = useState<CoursePageProps | null>(null)
     const [loading, setLoading] = useState(true)
 
     useEffect(() => {
@@ -35,5 +36,10 @@ export default function Course() {
     }
 
 
-    return <CoursePage courseSeletect={course} />
+    // return <CoursePage courseSeletect={course} />
+    return (
+        <div>
+            test
+        </div>
+    )
 }

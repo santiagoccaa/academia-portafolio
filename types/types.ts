@@ -67,3 +67,34 @@ export type CoursesCardHome = Prisma.CourseGetPayload<{
     avgStars: number,
     purchaseCourse: boolean
 }
+
+// Course Page
+
+export interface CoursePageProps {
+    purchaseCourse: boolean;
+    feedback: {
+        user: {
+            firstName: string
+            lastName: string
+            imageUrl: string;
+        };
+        userId: string;
+        title: never;
+        description: string;
+        stars: number;
+    }[];
+    level: string
+    id: string;
+    slug: string;
+    userId: string;
+    title: string;
+    description: string
+    imageUrl: string
+    price: string
+    updateAt: Date;
+    chapters: {
+        slug: string;
+        title: string;
+        duration: number;
+    }[];
+}
