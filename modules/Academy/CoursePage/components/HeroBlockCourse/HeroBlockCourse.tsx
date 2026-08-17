@@ -6,7 +6,6 @@ import { useTranslations } from 'next-intl'
 import { formatDuration } from '@/utils'
 import Link from 'next/link'
 import { Button } from '@/components/ui/button'
-import { Chapter, Course, FeedbackCourse } from '@/app/generated/prisma/client'
 
 interface HeroBlockCourse {
     description: string

@@ -7,11 +7,11 @@ import {
 } from "@/components/ui/carousel"
 
 import { CardCourse, TitlePage } from "@/components/Shared"
-import { CoursesCardHome } from "@/types"
+import { CourseData } from "@/types"
 import { CalendarCheck, Rocket } from "lucide-react"
 
 interface CoursesPageProps {
-    courses: CoursesCardHome[]
+    courses: CourseData[]
 }
 export const CoursesPage = ({ courses }: CoursesPageProps) => {
 
@@ -19,7 +19,7 @@ export const CoursesPage = ({ courses }: CoursesPageProps) => {
         <div className="w-full space-y-4">
             <TitlePage
                 icon={Rocket}
-                title="Destacados"  
+                title="Destacados"
             />
 
             <Carousel>
@@ -29,7 +29,7 @@ export const CoursesPage = ({ courses }: CoursesPageProps) => {
                             <CardCourse {...course} />
                         </CarouselItem>
                     ))}
-                    
+
                 </CarouselContent>
 
                 <div className="w-full flex py-4 justify-center gap-9">

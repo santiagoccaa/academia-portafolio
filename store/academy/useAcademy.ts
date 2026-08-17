@@ -1,18 +1,18 @@
-import { CoursesCardHome } from '@/types';
+import { CourseData } from '@/types';
 import { create } from 'zustand'
 
 interface AcademyState {
     // Todos los cursos
-    allCourses: CoursesCardHome[];
+    allCourses: CourseData[];
 
     // Funcion para buscar en la DB todos los cursos
-    getAllCourses: (courses: CoursesCardHome | CoursesCardHome[]) => void;
+    getAllCourses: (courses: CourseData | CourseData[]) => void;
 
     // Course seleccionado por el usuario
-    courseSelected: CoursesCardHome | null;
+    courseSelected: CourseData | null;
 
     // Funcion para seleccionar un curso
-    getCourseSelected: (course: CoursesCardHome) => void;
+    getCourseSelected: (course: CourseData) => void;
 
 }
 
@@ -22,9 +22,9 @@ export const useAcademy = create<AcademyState>((set) => ({
 
     getAllCourses: (courses) => {
         set({
-            allCourses: Array.isArray(courses)
+            allCourses: (Array.isArray(courses)
                 ? courses
-                : [courses],
+                : [courses]) as CourseData[],
         });
     },
 

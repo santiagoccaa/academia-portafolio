@@ -13,6 +13,10 @@ export const EditorDescription = ({ onChange, value }: EditorDescriptionProps) =
 
     const ReactQuill = useMemo(() => dynamic(() => import('react-quill-new'), { ssr: false }), [])
     return (
-        <ReactQuill theme="snow" value={value} onChange={onChange} />
+        <ReactQuill
+            theme="snow"
+            value={value}
+            onChange={onChange}
+        />
     )
 }

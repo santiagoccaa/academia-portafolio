@@ -4,22 +4,29 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/
 import { useTranslations } from "next-intl";
 import Image from "next/image";
 
-type User = {
+export interface FeedbackeProps {
     firstName: string;
     lastName: string;
     imageUrl: string;
-};
-
-type FeedbackWithUser = FeedbackCourse & {
-    user: User;
-};
-
-export interface FeedbackeProps {
-    feedback: FeedbackWithUser[]
+    description: string;
+    stars: number;
+    createdAt: Date
 }
 
-export const Feedback = ({ feedback }: FeedbackeProps) => {
+interface FeedbackProps {
+    feedback: FeedbackeProps[];
+}
+
+export const Feedback = ({ feedback }: FeedbackProps) => {
     const t = useTranslations('infoCourse')
+
+    if (feedback.length === 0) {
+        return (
+            <div className="flex items-center justify-center py-4">
+                <h2 className="text-lg font-light text-gray-600">No hay  opiniones sobre este curso</h2>
+            </div>
+        )
+    }
 
     return (
         <div className="border rounded-md p-4">
@@ -29,10 +36,10 @@ export const Feedback = ({ feedback }: FeedbackeProps) => {
                     <div key={index} className="py-2 border-b space-y-2">
                         <div className="flex items-center gap-2">
                             <div className="w-10 aspect-square rounded-full relative overflow-hidden">
-                                <Image src={item.user.imageUrl} fill alt={item.user.firstName || 'teacher'} />
+                                <Image src={item.imageUrl} fill alt={item.firstName || 'teacher'} />
                             </div>
                             <div className="flex flex-col">
-                                <span className="text-sm font-medium text-gray-800 capitalize">{item.user.firstName} {item.user.lastName}</span>
+                                <span className="text-sm font-medium text-gray-800 capitalize">{item.firstName} {item.lastName}</span>
                             </div>
                         </div>
 
