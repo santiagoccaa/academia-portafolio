@@ -33,15 +33,17 @@ export const ChapterSelectect = ({ chapterCourse, courseSlug }: ChapterSelectect
 
 
     return (
-        <div className="grid grid-cols-1 md:grid-cols-[4fr_2fr] gap-4">
+        <>
+            {/* <div className="grid grid-cols-1 md:grid-cols-[4fr_2fr] gap-4"> */}
             <InfoCourse
                 chapterInformation={chapter}
             />
 
-            <ChaptersCourse
+            {/* <ChaptersCourse
                 slug={courseSlug}
                 chapters={courseSelected.chapters}
-            />
-        </div>
+            /> */}
+            {/* </div> */}
+        </>
     )
 }

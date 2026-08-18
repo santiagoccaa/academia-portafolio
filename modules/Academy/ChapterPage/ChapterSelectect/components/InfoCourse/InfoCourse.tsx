@@ -1,8 +1,8 @@
+"use client"
+
 import { Lock } from 'lucide-react'
-import { Chapter, Course, FeedbackCourse } from "@/app/generated/prisma/client";
 import { VideoCourse } from './VideoCourse';
 import { ProgressCourse } from './ProgressCourse';
-import { FeedbackUserCourse } from './FeedbackUserCourse';
 import { useAcademy } from '@/store';
 import { ChapterData } from '@/types';
 
