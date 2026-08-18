@@ -10,6 +10,10 @@ export async function GET(
 
         const { userId } = await auth()
 
+        if (!userId) {
+            return NextResponse.json({ message: "USER_NOT_AUTHENTICATED" }, { status: 401 })
+        }
+
         const courses = await prisma.course.findMany({
             take: 9,
             where: {
@@ -20,69 +24,74 @@ export async function GET(
             },
             select: {
                 id: true,
-                category: true,
-                title: true,
-                createdAt: true,
-                userId: true,
-                price: true,
-                imageUrl: true,
-                description: true,
                 slug: true,
-                _count: {
-                    select: {
-                        purchases: true,
-                        feedback: true
-                    }
-                },
-                feedback: {
-                    select: {
-                        stars: true
-                    }
-                },
+                title: true,
+                description: true,
+                imageUrl: true,
+                price: true,
+                createdAt: true,
+                level: true,
+                category: true,
+                userId: true,
+
+                feedbackCount: true,
+                averageRating: true,
+
+                updatedAt: true,
+
                 courseAuthor: {
                     select: {
                         firstName: true,
                         lastName: true,
                         imageUrl: true
                     }
-                }
+                },
+
+                chapters: {
+                    where: {
+                        isPublised: true
+                    },
+                    orderBy: {
+                        position: "asc"
+                    },
+                    select: {
+                        slug: true,
+                        title: true,
+                        duration: true,
+                        userProgrestss: true,
+                        id: true,
+                    }
+                },
+                _count: {
+                    select: {
+                        purchases: true
+                    }
+                },
             }
         })
 
-        const coursesWithAvg = await Promise.all(
-            courses.map(async (course) => {
-                const avgStars = course.feedback.length > 0
-                    ? course.feedback.reduce((acc, f) => acc + f.stars, 0) / course.feedback.length
-                    : 0
+        const purchases = await prisma.purchase.findMany({
+            where: {
+                userId
+            },
+            select: {
+                courseId: true
+            }
+        });
 
-                const { feedback, ...courseRestFeedback } = course
+        const purchasedIds = new Set(
+            purchases.map(p => p.courseId)
+        );
 
-                let purchaseCourse = false
+        const coursesWithPurchaseInfo = courses.map(course => ({
+            ...course,
+            purchaseCourse: course.userId === userId || purchasedIds.has(course.id)
+        }));
 
-                if (userId) {
-                    purchaseCourse = await getIsPurchasedCourse(
-                        userId,
-                        course.id,
-                        course.userId
-                    )
-                }
-
-                const courseCompletedInformation = {
-                    ...courseRestFeedback,
-                    purchaseCourse
-                }
-
-                return {
-                    ...courseCompletedInformation,
-                    avgStars: Math.round(avgStars * 10) / 10
-                }
-            })
-        )
-
-        return NextResponse.json(coursesWithAvg, { status: 200 })
+        return NextResponse.json(coursesWithPurchaseInfo, { status: 200 })
 
     } catch (error) {
-
-        return NextResponse.json({ message: "GET_COURSES" }, { status: 200 })
+        console.log("GET ALL COURSES", error)
+        return NextResponse.json({ message: "GET_COURSES" }, { status: 500 })
     }
 }

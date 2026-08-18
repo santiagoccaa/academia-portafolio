@@ -1,45 +1,22 @@
 "use client"
 
-import { CoursePage } from '@/modules/Academy'
-import { CoursePageProps } from '@/types'
-import axios from 'axios'
-import { useParams } from 'next/navigation'
-import { useEffect, useState } from 'react'
+import { CoursePage } from "@/modules/Academy"
+import { useAcademy } from "@/store/academy/useAcademy"
+
 
 export default function Course() {
 
-    const { courseSlug } = useParams()
-    const [course, setCourse] = useState<CoursePageProps | null>(null)
-    const [loading, setLoading] = useState(true)
+    const { courseSelected } = useAcademy()
 
-    useEffect(() => {
-        const getCourse = async () => {
-            try {
-                const course = await axios.get(`/api/courses/${courseSlug}`)
-                setCourse(course.data)
-            } catch (error) {
-                console.log(error);
-            } finally {
-                setLoading(false)
-            }
-        }
+    if (!courseSelected) {
+        return (
+            <div className="flex justify-center items-center h-screen">
+                Este curso no existe
+            </div>
 
-        getCourse()
-    }, [])
-
-    if (loading) {
-        return <p>Caragando informacion</p>
+        )
     }
 
-    if (!course) {
-        return <p className='text-xl font-medium'>Este curso no esta disponible</p>
-    }
+    return <CoursePage courseSelected={courseSelected} />
 
-
-    // return <CoursePage courseSeletect={course} />
-    return (
-        <div>
-            test
-        </div>
-    )
 }

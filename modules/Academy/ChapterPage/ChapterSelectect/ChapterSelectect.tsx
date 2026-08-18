@@ -1,46 +1,49 @@
 "use client"
 
+import { useAcademy } from "@/store"
 import axios from "axios"
 import { useEffect, useState } from "react"
-import { ChaptersCourse, InfoCourse, InfoCourseProps } from "./components"
-import { Chapter, Course, FeedbackCourse } from "@/app/generated/prisma/client"
+import { ChaptersCourse, InfoCourse } from "./components"
+import { ChapterData } from "@/types"
 
 interface ChapterSelectectProps {
     courseSlug: string
     chapterCourse: string
 }
 
-type InformationCourse = Course & { chapters: Chapter[], feedback?: FeedbackCourse[], purchaseCourse: boolean }
-
-
 export const ChapterSelectect = ({ chapterCourse, courseSlug }: ChapterSelectectProps) => {
 
-    const [infoCourse, setInfoCourse] = useState<InformationCourse | null>(null)
+    const { courseSelected } = useAcademy()
+
+    const [chapter, setChapeter] = useState<ChapterData>()
 
     useEffect(() => {
         const getCourse = async () => {
-            const { data } = await axios.get(`/api/courses/${courseSlug}`)
-            setInfoCourse(data)
+            const { data } = await axios.get(`/api/courses/chapters/${courseSelected?.id}/${chapterCourse}`)
+
+            setChapeter(data)
+
         }
         getCourse()
     }, [])
 
-    if (!infoCourse) {
-        return <p>Buscando informacion</p>
+    if (!chapter || !courseSelected) {
+        return <p>No hay informacion del chapter</p>
     }
 
+
     return (
-        <div className="grid grid-cols-1 md:grid-cols-[60%_1fr] gap-4">
+        <>
+            {/* <div className="grid grid-cols-1 md:grid-cols-[4fr_2fr] gap-4"> */}
             <InfoCourse
-                slugChapter={chapterCourse}
-                infoCourse={infoCourse}
+                chapterInformation={chapter}
             />
 
-            <ChaptersCourse
-                chapters={infoCourse}
-                courseSlug={courseSlug}
-                chapterCourse={chapterCourse}
-            />
-        </div>
+            {/* <ChaptersCourse
+                slug={courseSlug}
+                chapters={courseSelected.chapters}
+            /> */}
+            {/* </div> */}
+        </>
     )
 }

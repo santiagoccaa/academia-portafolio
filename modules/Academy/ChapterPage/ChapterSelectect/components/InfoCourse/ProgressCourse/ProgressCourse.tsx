@@ -7,20 +7,21 @@ import axios from 'axios'
 import { toast } from 'sonner'
 import { useRouter } from 'next/navigation'
 import { useTranslations } from 'next-intl'
-import { Chapter, Course, UserProgress } from "@/app/generated/prisma/client"
+import { UserProgress } from "@/app/generated/prisma/client"
+import { ChaptersArray } from '@/types'
 
 export type ProgressCourseProps = {
     chapterCourseId: string
-    infoCourse: Course & { chapters: Chapter[] }
+    courseId: string
+    slug: string
+    chapters: ChaptersArray[]
 }
 
-export const ProgressCourse = ({ chapterCourseId, infoCourse }: ProgressCourseProps) => {
+export const ProgressCourse = ({ chapterCourseId, chapters, courseId, slug }: ProgressCourseProps) => {
 
     const t = useTranslations()
 
     const router = useRouter()
-
-    const { id, slug, chapters } = infoCourse
 
     const [isCompleted, setIsCompleted] = useState(false)
     const [userProgress, setUserProgress] = useState<UserProgress[] | []>([])
@@ -52,7 +53,7 @@ export const ProgressCourse = ({ chapterCourseId, infoCourse }: ProgressCoursePr
 
     const handleViewChapters = async (isCompleted: boolean) => {
         try {
-            await axios.patch(`/api/course/${id}/chapter/${chapterCourseId}/progress`, JSON.stringify({ isCompleted }))
+            await axios.patch(`/api/course/${courseId}/chapter/${chapterCourseId}/progress`, JSON.stringify({ isCompleted }))
 
             toast(isCompleted ? t('alerts.alert3') : t('alerts.alert4'))
 

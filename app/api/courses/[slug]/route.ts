@@ -1,101 +1,104 @@
-import { getIsPurchasedCourse } from "@/actions";
-import prisma from "@/lib/prisma";
-import { auth, clerkClient } from "@clerk/nextjs/server";
-import { NextResponse } from "next/server";
+import prisma from "@/lib/prisma"
+import { auth } from "@clerk/nextjs/server"
+import { NextResponse } from "next/server"
 
 interface Params {
     params: Promise<{ slug: string }>
 }
 
-export async function GET(req: Request, { params }: Params) {
-    const { userId } = await auth();
-    const client = await clerkClient();
 
+export async function GET(
+    req: Request,
+    { params }: Params
+) {
     try {
-        const { slug } = await params;
+
+        const { slug } = await params
+
+        const { userId } = await auth()
 
         if (!userId) {
-            return NextResponse.json("Unauthorized", { status: 401 });
+            return NextResponse.json({ message: "USER_NOT_AUTHENTICATED" }, { status: 401 })
         }
 
-        const course = await prisma.course.findUnique(
-            {
-                where: {
-                    slug,
-                    isPublished: true,
-                },
-                select: {
-                    id: true,
-                    title: true,
-                    description: true,
-                    price: true,
-                    imageUrl: true,
-                    userId: true,
-                    level:true,
-                    updateAt: true,
-                    slug: true,
-                    chapters: {
-                        where: {
-                            isPublised: true,
-                        },
-                        orderBy: {
-                            position: "asc",
-                        },
-                        select: {
-                            slug: true,
-                            title: true,
-                            duration: true,
-                        },
-                    },
-                    feedback: {
-                        orderBy: {
-                            stars: "desc",
-                        },
-                        select: {
-                            stars: true,
-                            userId: true,
-                            description: true,
-                        }
+        const course = await prisma.course.findUnique({
+            where: {
+                slug
+            },
+            select: {
+                id: true,
+                slug: true,
+                title: true,
+                description: true,
+                imageUrl: true,
+                price: true,
+                createdAt: true,
+                level: true,
+                category: true,
+                userId: true,
+
+                feedbackCount: true,
+                averageRating: true,
+
+                updatedAt: true,
+
+                courseAuthor: {
+                    select: {
+                        firstName: true,
+                        lastName: true,
+                        imageUrl: true
                     }
-                }
-            });
+                },
+
+                chapters: {
+                    where: {
+                        isPublised: true
+                    },
+                    orderBy: {
+                        position: "asc"
+                    },
+                    select: {
+                        slug: true,
+                        title: true,
+                        duration: true,
+                        userProgrestss: true,
+                        id: true,
+                    }
+                },
+                _count: {
+                    select: {
+                        purchases: true
+                    }
+                },
+            }
+        })
 
         if (!course) {
-            return NextResponse.json("COURSE NOT FOUND", { status: 404 });
+            return NextResponse.json(null, { status: 401 })
         }
 
-        const feedbackWithUser = await Promise.all(
-            course.feedback.map(async (item) => {
-                const user = await client.users.getUser(item.userId);
+        const purchases = await prisma.purchase.findMany({
+            where: {
+                userId
+            },
+            select: {
+                courseId: true
+            }
+        });
 
-                return {
-                    ...item,
-                    user: {
-                        firstName: user.firstName,
-                        lastName: user.lastName,
-                        imageUrl: user.imageUrl,
-                    },
-                };
-            })
+        const purchasedIds = new Set(
+            purchases.map(p => p.courseId)
         );
 
-        const purchaseCourse = await getIsPurchasedCourse(
-            userId,
-            course.id,
-            course.userId
-        );
-
-        const allInformationCourse = {
+        const coursesWithPurchaseInfo = {
             ...course,
-            purchaseCourse,
-            feedback: feedbackWithUser,
+            purchaseCourse: course.userId === userId || purchasedIds.has(course.id)
         }
-        return NextResponse.json(
-            allInformationCourse,
-            { status: 200 }
-        );
+
+        return NextResponse.json(coursesWithPurchaseInfo, { status: 200 })
+
     } catch (error) {
-        console.log("GET_COURSE_BY_SLUG", error);
-        return NextResponse.json("GET COURSE BY SLUG", { status: 500 });
+        console.log("GET UNIQUE COURSE", error)
+        return NextResponse.json({ message: "GET_COURSES" }, { status: 500 })
     }
 }

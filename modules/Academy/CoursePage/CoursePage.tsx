@@ -1,10 +1,33 @@
-import { CoursePageProps } from "@/types"
-import { BreadCrumbCourse, CourseContent, Feedback, HeroBlockCourse } from "./components"
+"use client"
 
+import { CourseData } from "@/types"
+import { BreadCrumbCourse, CourseContent, Feedback, FeedbackeProps, HeroBlockCourse } from "./components"
+import axios from "axios"
+import { useEffect, useState } from "react"
 
-export const CoursePage = (courseSeletect: CoursePageProps) => {
+interface CoursePageProps {
+    courseSelected: CourseData
+}
+export const CoursePage = ({ courseSelected }: CoursePageProps) => {
 
-    const { description, price, level, imageUrl, updateAt, slug, feedback, title, chapters, purchaseCourse } = courseSeletect
+    const { description, price, level, imageUrl, slug, title, chapters, purchaseCourse, updatedAt, id } = courseSelected
+
+    const [feedback, setFeedback] = useState<FeedbackeProps[]>([])
+
+    useEffect(
+        () => {
+            const fetchFeedback = async () => {
+                try {
+                    const { data } = await axios.get(`/api/courses/feedback/${id}`)
+                    setFeedback(data)
+                }
+                catch (error) {
+                    console.log("Error fetching feedback:", error)
+                }
+
+            }
+        }, [])
+
 
     return (
         <div className="space-y-4">
@@ -22,7 +45,7 @@ export const CoursePage = (courseSeletect: CoursePageProps) => {
                     purchaseCourse={purchaseCourse}
                     slug={slug}
                     title={title}
-                    updateAt={updateAt}
+                    updateAt={updatedAt}
                 />
             </div>
 
@@ -30,7 +53,7 @@ export const CoursePage = (courseSeletect: CoursePageProps) => {
                 <CourseContent chapters={chapters} />
             </div>
 
-            {/* {feedback && feedback.length > 0 && <Feedback feedback={feedback} />} */}
+            <Feedback feedback={feedback} />
         </div>
     )
 }

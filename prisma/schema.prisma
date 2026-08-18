@@ -27,14 +27,14 @@ model Course {
   chapters  Chapter[]
   purchases Purchase[]
   feedback  FeedbackCourse[]
-
+  
   averageRating Float @default(0)
   feedbackCount Int   @default(0)
 
   courseAuthor CourseAuthor @relation(fields: [userId], references: [userId], onDelete: Cascade)
 
   createdAt DateTime @default(now())
-  updateAt  DateTime @updatedAt
+  updatedAt  DateTime @updatedAt
 }
 
 model CourseAuthor {
@@ -47,7 +47,7 @@ model CourseAuthor {
   courses Course[]
 
   createdAt DateTime @default(now())
-  updateAt  DateTime @updatedAt
+  updatedAt  DateTime @updatedAt
 }
 
 model FeedbackCourse {
@@ -62,7 +62,7 @@ model FeedbackCourse {
   stars       Int
 
   createdAt DateTime @default(now())
-  updateAt  DateTime @updatedAt
+  updatedAt  DateTime @updatedAt
   course    Course   @relation(fields: [courseId], references: [id], onDelete: Cascade)
   courseId  String
 
@@ -86,7 +86,7 @@ model Chapter {
   userProgrestss UserProgress[]
 
   createdAt DateTime @default(now())
-  updateAt  DateTime @updatedAt
+  updatedAt  DateTime @updatedAt
 }
 
 model UserProgress {
@@ -99,7 +99,7 @@ model UserProgress {
   isCompleted Boolean @default(false)
 
   createdAt DateTime @default(now())
-  updateAt  DateTime @updatedAt
+  updatedAt  DateTime @updatedAt
 
   @@unique([userId, chapterId])
   @@index([chapterId])
@@ -115,7 +115,7 @@ model Purchase {
   price Float
 
   createdAt DateTime @default(now())
-  updateAt  DateTime @updatedAt
+  updatedAt  DateTime @updatedAt
 
   @@unique([userId, courseId])
   @@index([courseId])
@@ -127,5 +127,5 @@ model StripeCustomer {
   stripeCustomerId String
 
   createdAt DateTime @default(now())
-  updateAt  DateTime @updatedAt
+  updatedAt  DateTime @updatedAt
 }
