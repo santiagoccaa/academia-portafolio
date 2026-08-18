@@ -53,7 +53,7 @@ export const ProgressCourse = ({ chapterCourseId, chapters, courseId, slug }: Pr
 
     const handleViewChapters = async (isCompleted: boolean) => {
         try {
-            await axios.patch(`/api/course/${courseId}/chapter/${chapterCourseId}/progress`, JSON.stringify({ isCompleted }))
+            await axios.patch(`/api/courses/chapters/${courseId}/${slug.replaceAll(' ', '-').toLocaleLowerCase()}/progress`, JSON.stringify({ isCompleted }))
 
             toast(isCompleted ? t('alerts.alert3') : t('alerts.alert4'))
 
