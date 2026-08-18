@@ -12,6 +12,8 @@ interface InfoCourseProps {
 
 export const InfoCourse = ({ chapterInformation }: InfoCourseProps) => {
 
+    console.log("COURSE:", chapterInformation)
+
     const { courseSelected } = useAcademy()
 
     const { description, id, title, videoUrl } = chapterInformation
@@ -39,7 +41,7 @@ export const InfoCourse = ({ chapterInformation }: InfoCourseProps) => {
                 chapterCourseId={id}
                 chapters={courseSelected?.chapters}
                 courseId={courseSelected?.id}
-                slug={courseSelected?.slug}
+                slug={chapterInformation.title}
             />
 
             <div className='mt-4 rounded-md p-4 shadow-md w-full'>
